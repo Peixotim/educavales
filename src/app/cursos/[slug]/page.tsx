@@ -313,7 +313,7 @@ export default function PaginaDeDetalhesDoCurso() {
                     onClick={openModal}
                     className="w-full h-14 mt-4 rounded-xl bg-green-600 text-white text-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/30 hover:shadow-xl hover:shadow-green-500/40"
                   >
-                    Garantir Minha Vaga <ArrowRight className="ml-2" />
+                    Saiba mais <ArrowRight className="ml-2" />
                   </Button>
                 </CardContent>
               </Card>
