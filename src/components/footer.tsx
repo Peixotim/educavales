@@ -151,9 +151,7 @@ const Footer = () => {
             <ul className="space-y-5 text-sm">
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#16a34a]" />
-                <span>
-                  Rua Exemplo, 123, Bairro Centro, Coronel Fabriciano - MG
-                </span>
+                <span>R. Rio Doce, 50 - Professores, Cel. Fabriciano - MG</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#16a34a]" />
@@ -161,7 +159,7 @@ const Footer = () => {
                   href="mailto:contato@tecminas.com"
                   className="hover:text-[#16a34a] transition-colors"
                 >
-                  contato@tecminas.com
+                  1educavale@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-3">
@@ -170,7 +168,7 @@ const Footer = () => {
                   href="tel:+5531999999999"
                   className="hover:text-[#16a34a] transition-colors"
                 >
-                  (31) 99999-9999
+                  (31) 99139-8980
                 </a>
               </li>
             </ul>

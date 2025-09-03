@@ -20,14 +20,14 @@ export default function Contact() {
     {
       icon: <Phone className="h-6 w-6 text-green-600" />,
       label: "Telefone Suporte",
-      value: "(31) 98681-3351",
-      href: "tel:+5531986813351",
+      value: "(31) 91399-8980",
+      href: "tel:+55913998980",
     },
     {
       icon: <Mail className="h-6 w-6 text-green-600" />,
       label: "E-mail para Contato",
-      value: "ilconsultoria@outlook.com",
-      href: "mailto:ilconsultoria@outlook.com",
+      value: "1educavale@gmail.com",
+      href: "mailto:1educavale@gmail.com",
     },
     {
       icon: <Instagram className="h-6 w-6 text-green-600" />,
@@ -38,7 +38,7 @@ export default function Contact() {
     {
       icon: <MapPin className="h-6 w-6 text-green-600" />,
       label: "Nosso Endereço",
-      value: "Canaã dos Carajás, 94, Bairro Vale Dourado, Pará",
+      value: "R. Rio Doce, 50 - Professores, Cel. Fabriciano - MG, 35170-112",
     },
   ];
 
@@ -52,7 +52,7 @@ export default function Contact() {
     event.preventDefault();
 
     // Seu número de WhatsApp (código do país + DDD + número)
-    const whatsappNumber = "5531986813351";
+    const whatsappNumber = "5531991398980";
 
     // Monta a mensagem final com os dados dos estados
     const finalMessage = `Olá! Meu nome é ${name} (email: ${email}) e meu questionamento é: "${message}"`;
