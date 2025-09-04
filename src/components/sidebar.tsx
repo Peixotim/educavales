@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll } from "framer-motion";
 import Modal from "@/components/modalContactsCourses/modal";
 import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm";
-import { submitSubscription } from "./lib/api";
+import { submitSubscription2 } from "./lib/api2";
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -22,14 +22,13 @@ export const Header = () => {
   const [hidden, setHidden] = React.useState(false);
   const { scrollY } = useScroll();
 
-  // --- LÓGICA DO MODAL ATUALIZADA ---
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
 
-  const WHATSAPP_NUMBER = "5531999999999"; // 👈 SUBSTITUA PELO SEU NÚMERO
+  const WHATSAPP_NUMBER = "5531999999999"; // Substituir depois para o numero da empresa
 
   const openModal = () => {
     setFormStatus("form");
@@ -38,22 +37,25 @@ export const Header = () => {
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // --- FUNÇÃO DE SUBMISSÃO ATUALIZADA ---
+  // ✅ CORREÇÕES APLICADAS AQUI
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
     try {
       const formData = new FormData(event.currentTarget);
+
+      // Objeto de dados ajustado para o formato da API
       const data = {
-        fullerName: formData.get("name") as string,
+        name: formData.get("name") as string, // Corrigido de 'fullerName'
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        areaOfInterest: formData.get("interestArea") as string,
-        course: "Contato Geral (Header)",
+        areaOfInterest: formData.get("interestArea") as string, // Corrigido
+        enterpriseId: 1, // Corrigido
       };
 
-      await submitSubscription(data);
+      await submitSubscription2(data);
 
-      const message = `Olá! Meu nome é ${data.fullerName} e tenho interesse na área de ${data.areaOfInterest}. Gostaria de mais informações.`;
+      // Mensagem do WhatsApp corrigida (sem email)
+      const message = `Olá! Meu nome é ${data.name} e tenho interesse na área de ${data.areaOfInterest}. Gostaria de mais informações.`;
       setWhatsappMessage(message);
 
       setFormStatus("success");
@@ -64,7 +66,6 @@ export const Header = () => {
     }
   };
 
-  // --- NOVA FUNÇÃO DE REDIRECIONAMENTO ---
   const handleWhatsAppRedirect = () => {
     const encodedMessage = encodeURIComponent(whatsappMessage);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
@@ -90,7 +91,7 @@ export const Header = () => {
         className="fixed top-0 left-0 z-50 w-full"
       >
         <nav
-          data-state={menuState && "active"}
+          data-state={menuState ? "active" : "inactive"}
           className="backdrop-blur-xl bg-white/90 border-b border-slate-200 shadow-sm"
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -109,7 +110,6 @@ export const Header = () => {
                   />
                 </div>
               </Link>
-
               <ul className="hidden lg:flex gap-8 font-semibold text-base">
                 {menuItems.map((item) => (
                   <li key={item.name}>
@@ -122,7 +122,6 @@ export const Header = () => {
                   </li>
                 ))}
               </ul>
-
               <div className="hidden lg:flex">
                 <Button
                   onClick={openModal}
@@ -132,7 +131,6 @@ export const Header = () => {
                   Fale Conosco
                 </Button>
               </div>
-
               <button
                 onClick={() => setMenuState(!menuState)}
                 aria-label={menuState ? "Fechar Menu" : "Abrir Menu"}
@@ -142,7 +140,6 @@ export const Header = () => {
               </button>
             </div>
           </div>
-
           {menuState && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -185,8 +182,7 @@ export const Header = () => {
           status={formStatus}
           onSubmit={handleFormSubmit}
           onCancel={closeModal}
-          onSuccessRedirect={handleWhatsAppRedirect} // Passa a nova função
-          selectedContent="Area Desejada"
+          onSuccessRedirect={handleWhatsAppRedirect}
         />
       </Modal>
     </>

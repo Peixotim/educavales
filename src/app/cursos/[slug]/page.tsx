@@ -1,8 +1,7 @@
-// Salve em: app/cursos/[slug]/page.tsx (Versão Completa e Corrigida)
+// Salve em: app/cursos/[slug]/page.tsx
 
 "use client";
 
-// MUDANÇA 1: Importar o useState e os componentes do Modal
 import { useState } from "react";
 import { useParams, notFound, useRouter } from "next/navigation";
 import { slugify } from "@/utils/slugify";
@@ -24,9 +23,9 @@ import {
   BookX,
   ShieldCheck,
 } from "lucide-react";
-import Modal from "@/components/modalContactsCourses/modal"; // Ajuste o caminho se necessário
-import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm"; // Ajuste o caminho se necessário
-//import { submitSubscription } from "@/components/lib/api"; // Ajuste o caminho se necessário
+import Modal from "@/components/modalContactsCourses/modal";
+import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm";
+import { submitSubscription2 } from "@/components/lib/api2";
 
 type Plan = {
   title: string;
@@ -35,7 +34,6 @@ type Plan = {
   highlight: boolean;
   badge?: string;
 };
-
 const defaultPlans: Plan[] = [
   {
     title: "1 Pós-Graduação",
@@ -57,7 +55,6 @@ const defaultPlans: Plan[] = [
     badge: "Melhor Oferta",
   },
 ];
-
 const engineeringPlans: Plan[] = [
   {
     title: "1 Pós-Graduação",
@@ -70,18 +67,15 @@ const engineeringPlans: Plan[] = [
 export default function PaginaDeDetalhesDoCurso() {
   const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
-
   const allAreaDetails = StoragedAreaInfo();
   const areaInfo = allAreaDetails.find((area) => slugify(area.title) === slug);
 
-  // MUDANÇA 2: Adicionar os estados e as funções para controlar o modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
-
-  const WHATSAPP_NUMBER = "5531999999999"; // 👈 SEU NÚMERO DE WHATSAPP
+  const WHATSAPP_NUMBER = "5531999999999";
 
   const openModal = () => {
     setFormStatus("form");
@@ -89,24 +83,33 @@ export default function PaginaDeDetalhesDoCurso() {
   };
   const closeModal = () => setIsModalOpen(false);
 
+  // ✅ OBJETO DE DADOS E MENSAGEM ATUALIZADOS
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
     try {
       const formData = new FormData(event.currentTarget);
+
+      // Objeto de dados alinhado com o que a API espera
       const data = {
-        fullName: formData.get("name") as string,
-        email: formData.get("email") as string,
-        whatsapp: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        interestArea: formData.get("interestArea") as string,
-        course: areaInfo?.title,
+        name: formData.get("name") as string,
+        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
+        areaOfInterest: formData.get("interestArea") as string,
+        enterpriseId: 1, // Defina o ID correto da empresa aqui
       };
-      // await submitSubscription(data); // Sua chamada de API aqui
-      const message = `Olá! Tenho interesse na área de ${data.course}. Meu nome é ${data.fullName}.`;
+
+      console.log("🚀 Enviando para a API:", data);
+      await submitSubscription2(data);
+
+      // Mensagem do WhatsApp sem o e-mail
+      const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.name}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {
-      console.error("Erro:", error);
+      console.error("Erro ao enviar formulário:", error);
+      alert(
+        "Houve um erro ao enviar sua inscrição. Por favor, tente novamente."
+      );
       setFormStatus("form");
     }
   };
@@ -122,13 +125,10 @@ export default function PaginaDeDetalhesDoCurso() {
     notFound();
   }
 
-  let currentPlans;
-  if (areaInfo.title === "Engenharia e Arquitetura – Projete o Futuro") {
-    currentPlans = engineeringPlans;
-  } else {
-    currentPlans = defaultPlans;
-  }
-
+  const currentPlans =
+    areaInfo.title === "Engenharia e Arquitetura – Projete o Futuro"
+      ? engineeringPlans
+      : defaultPlans;
   const keyInfoCards = [
     {
       icon: <ShieldCheck />,
@@ -144,7 +144,6 @@ export default function PaginaDeDetalhesDoCurso() {
     },
   ];
 
-  // MUDANÇA 3: O return principal agora é um Fragment <> para incluir o Modal
   return (
     <>
       <div className="bg-slate-50">
@@ -155,13 +154,10 @@ export default function PaginaDeDetalhesDoCurso() {
               onClick={() => router.back()}
               className="text-slate-600 hover:text-slate-900"
             >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar
+              <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
             </Button>
           </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-            {/* Coluna da Esquerda */}
             <motion.div
               className="lg:col-span-3"
               initial={{ opacity: 0, x: -50 }}
@@ -177,7 +173,6 @@ export default function PaginaDeDetalhesDoCurso() {
               <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
                 {areaInfo.title}
               </h1>
-
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 {keyInfoCards.map((info, i) => (
                   <Card
@@ -196,9 +191,7 @@ export default function PaginaDeDetalhesDoCurso() {
                   </Card>
                 ))}
               </div>
-
               <Separator className="my-10" />
-
               <div className="space-y-12">
                 <div id="o-que-voce-vai-aprender">
                   <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
@@ -213,7 +206,6 @@ export default function PaginaDeDetalhesDoCurso() {
                     ))}
                   </ul>
                 </div>
-
                 {areaInfo.sections.map((section, i) => (
                   <div key={i}>
                     <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
@@ -229,7 +221,6 @@ export default function PaginaDeDetalhesDoCurso() {
                     </p>
                   </div>
                 ))}
-
                 {areaInfo.depoiments && (
                   <div className="border-t border-slate-200 pt-10">
                     <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3 mb-4">
@@ -253,8 +244,6 @@ export default function PaginaDeDetalhesDoCurso() {
                 )}
               </div>
             </motion.div>
-
-            {/* Coluna da Direita */}
             <motion.div
               className="lg:col-span-2"
               initial={{ opacity: 0, x: 50 }}
@@ -308,7 +297,6 @@ export default function PaginaDeDetalhesDoCurso() {
                       </div>
                     </div>
                   ))}
-                  {/* MUDANÇA 4: Adicionar onClick ao botão "Garantir Minha Vaga" */}
                   <Button
                     onClick={openModal}
                     className="w-full h-14 mt-4 rounded-xl bg-green-600 text-white text-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/30 hover:shadow-xl hover:shadow-green-500/40"
@@ -321,15 +309,12 @@ export default function PaginaDeDetalhesDoCurso() {
           </div>
         </div>
       </div>
-
-      {/* MUDANÇA 5: Renderizar o componente Modal no final do arquivo */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <SubscriptionForm
           status={formStatus}
           onSubmit={handleFormSubmit}
           onCancel={closeModal}
           onSuccessRedirect={handleWhatsAppRedirect}
-          selectedContent={areaInfo.title}
         />
       </Modal>
     </>

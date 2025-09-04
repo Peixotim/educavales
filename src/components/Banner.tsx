@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   CheckCircle2,
   Rocket,
@@ -24,10 +24,9 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "./lib/utils";
-import { submitSubscription2 as submitSubscription } from "./lib/api2";
+import { submitSubscription2 } from "./lib/api2";
 
 // --- Dados e Componentes de Abas ---
-
 const plans = [
   {
     title: "1 Pós-Graduação",
@@ -49,7 +48,6 @@ const plans = [
     badge: "Melhor Oferta",
   },
 ];
-
 const courseAreas = [
   "Arte, Moda e Música",
   "Ciências Agrárias e Veterinária",
@@ -101,6 +99,7 @@ const PlansTabContent = ({ onButtonClick }: { onButtonClick: () => void }) => (
               plan.highlight && "border-2 border-green-500 shadow-lg"
             )}
           >
+            {" "}
             <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               {plan.highlight && (
                 <Badge className="absolute -top-3 left-4 bg-green-600">
@@ -108,7 +107,7 @@ const PlansTabContent = ({ onButtonClick }: { onButtonClick: () => void }) => (
                   {plan.badge}
                 </Badge>
               )}
-              <div>
+              <div className="text-left">
                 <p className="font-bold text-slate-800">{plan.title}</p>
                 <p className="text-xs text-slate-500">{plan.description}</p>
               </div>
@@ -142,22 +141,25 @@ const InfoTabContent = () => {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  // ✅ CORREÇÕES APLICADAS AQUI
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("loading");
-
     try {
       const formData = new FormData(event.currentTarget);
+
+      // Objeto de dados ajustado para o formato da API
       const data = {
-        fullName: formData.get("fullName") as string,
-        email: formData.get("email") as string,
-        whatsapp: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        interestArea: formData.get("interestArea") as string,
+        name: formData.get("fullName") as string,
+        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
+        areaOfInterest: formData.get("interestArea") as string,
+        enterpriseId: 1, // Adicionado o ID da empresa
       };
 
-      await submitSubscription(data);
+      await submitSubscription2(data);
       setStatus("success");
     } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
       setStatus("error");
     }
   };
@@ -200,19 +202,16 @@ const InfoTabContent = () => {
                 className="h-12 rounded-lg"
                 required
               />
-              <Input
-                name="email"
-                type="email"
-                placeholder="Seu melhor e-mail"
-                className="h-12 rounded-lg"
-                required
-              />
+
+              {/* ✅ CAMPO DE E-MAIL REMOVIDO */}
+
               <Input
                 name="whatsapp"
                 placeholder="WhatsApp (com DDD)"
                 className="h-12 rounded-lg"
                 required
               />
+
               <Select name="interestArea" required>
                 <SelectTrigger className="h-12 rounded-lg">
                   <SelectValue placeholder="Escolha sua área de interesse" />
@@ -267,7 +266,6 @@ export default function HeroPremium() {
   return (
     <section className="relative overflow-hidden">
       <div className="container mx-auto px-6 py-24 sm:py-32 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Lado Esquerdo (Conteúdo) */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -318,8 +316,6 @@ export default function HeroPremium() {
             </div>
           </div>
         </motion.div>
-
-        {/* Lado Direito (Ofertas e Formulário) */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}

@@ -6,36 +6,33 @@ import {
   ChevronDown,
   CheckCircle,
   Loader2,
-  MessageSquare,
+  MessageCircle,
 } from "lucide-react";
 
-// --- Componente de Loading ---
+// --- Componentes internos de estado (Loading, Success) ---
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
-    <Loader2 className="h-12 w-12 text-[#8B1A3B] animate-spin" />
+    <Loader2 className="h-12 w-12 text-green-500 animate-spin" />
     <p className="mt-4 text-lg font-medium text-slate-600">
       Enviando seus dados...
     </p>
-    <p className="text-sm text-slate-500">Aguarde um momento.</p>
   </div>
 );
-
-// --- Componente de Sucesso com Botão WhatsApp ---
 const SuccessState = ({
+  onSuccessRedirect,
   onClose,
-  onRedirect,
 }: {
+  onSuccessRedirect: () => void;
   onClose: () => void;
-  onRedirect: () => void;
 }) => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
     <CheckCircle className="h-16 w-16 text-green-500" />
-    <h2 className="mt-4 text-3xl font-bold text-[#6A0E29]">Dados Recebidos!</h2>
-    <p className="mt-2 text-slate-600 max-w-sm">
-      Seu interesse foi registrado com sucesso. Clique no botão abaixo para
-      iniciar a conversa com um de nossos consultores.
+    <h2 className="mt-4 text-3xl font-bold text-slate-800">Dados Enviados!</h2>
+    <p className="mt-2 text-slate-600">
+      Obrigado! Para agilizar seu atendimento, clique no botão abaixo para nos
+      chamar no WhatsApp.
     </p>
-    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full">
+    <div className="mt-8 w-full flex flex-col sm:flex-row gap-3">
       <button
         onClick={onClose}
         className="w-full sm:w-auto px-6 py-3 text-slate-600 font-semibold rounded-lg hover:bg-slate-100 transition-colors"
@@ -43,17 +40,24 @@ const SuccessState = ({
         Fechar
       </button>
       <button
-        onClick={onRedirect}
-        className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-green-500/20 hover:bg-green-700 hover:-translate-y-1 hover:shadow-2xl hover:shadow-green-500/40 transition-all duration-300 ease-in-out"
+        onClick={onSuccessRedirect}
+        className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-500 text-white font-bold rounded-lg shadow-lg hover:bg-green-600 transition-all"
       >
-        <MessageSquare size={18} />
+        <MessageCircle size={18} />
         <span>Conversar no WhatsApp</span>
       </button>
     </div>
   </div>
 );
 
-//--- Componente Principal do Formulário ---
+// --- Props do Formulário ---
+type SubscriptionFormProps = {
+  status: "form" | "loading" | "success";
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onCancel: () => void;
+  onSuccessRedirect?: () => void;
+};
+
 const areasDeInteresse = [
   "Arte, Moda e Música",
   "Ciências Agrárias e Veterinária",
@@ -85,71 +89,53 @@ const areasDeInteresse = [
   "T.I",
 ];
 
-type SubscriptionFormProps = {
-  status: "form" | "loading" | "success";
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  onCancel: () => void;
-  onSuccessRedirect: () => void;
-  selectedContent: string;
-};
-
 export default function SubscriptionForm({
   status,
   onSubmit,
   onCancel,
   onSuccessRedirect,
-  selectedContent,
 }: SubscriptionFormProps) {
   const inputStyle =
-    "w-full px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-green-600 focus:ring-4 focus:ring-green-200/20 transition-all duration-300";
+    "w-full px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all";
   const [whatsapp, setWhatsapp] = useState("");
 
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\D/g, "");
-    const limitedValue = rawValue.substring(0, 11);
-    let formattedValue = limitedValue;
-    if (limitedValue.length > 2)
-      formattedValue = `(${limitedValue.substring(
+    let formattedValue = rawValue.substring(0, 11);
+    if (formattedValue.length > 2)
+      formattedValue = `(${formattedValue.substring(
         0,
         2
-      )}) ${limitedValue.substring(2)}`;
-    if (limitedValue.length > 7)
-      formattedValue = `(${limitedValue.substring(
+      )}) ${formattedValue.substring(2)}`;
+    if (formattedValue.length > 8)
+      formattedValue = `(${formattedValue.substring(
         0,
         2
-      )}) ${limitedValue.substring(2, 7)}-${limitedValue.substring(7)}`;
+      )}) ${formattedValue.substring(2, 7)}-${formattedValue.substring(7)}`;
     setWhatsapp(formattedValue);
   };
 
-  if (status === "loading") {
-    return <LoadingState />;
-  }
-
-  if (status === "success") {
-    return <SuccessState onClose={onCancel} onRedirect={onSuccessRedirect} />;
-  }
+  if (status === "loading") return <LoadingState />;
+  if (status === "success" && onSuccessRedirect)
+    return (
+      <SuccessState onSuccessRedirect={onSuccessRedirect} onClose={onCancel} />
+    );
 
   return (
     <div className="text-center">
-      <h2 className="text-3xl font-bold text-green-500">
-        Fale com um Consultor
-      </h2>
+      <h2 className="text-3xl font-bold text-slate-800">Fale Conosco</h2>
       <p className="text-slate-500 mt-2 mb-6">
-        Preencha seus dados para iniciar o atendimento.
+        Preencha seus dados para iniciar uma conversa.
       </p>
-      <div className="mb-8">
-        <span className="inline-block bg-cyan-950 text-green-500 text-sm font-semibold px-4 py-1.5 rounded-full">
-          Área de Interesse: <strong>{selectedContent}</strong>
-        </span>
-      </div>
+
       <form onSubmit={onSubmit} className="text-left">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
-          <div className="sm:col-span-2">
+        <div className="space-y-5">
+          <div>
             <label
               htmlFor="name"
               className="block text-sm font-medium text-slate-600 mb-1"
             >
-              Nome Completo <span className="text-green-500">*</span>
+              Nome Completo <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -160,12 +146,13 @@ export default function SubscriptionForm({
               placeholder="Seu nome completo"
             />
           </div>
+
           <div>
             <label
               htmlFor="whatsapp"
               className="block text-sm font-medium text-slate-600 mb-1"
             >
-              WhatsApp <span className="text-green-500">*</span>
+              WhatsApp <span className="text-red-500">*</span>
             </label>
             <input
               type="tel"
@@ -173,17 +160,18 @@ export default function SubscriptionForm({
               name="whatsapp"
               required
               className={inputStyle}
-              placeholder="(31) 99999-9999"
+              placeholder="(00) 00000-0000"
               value={whatsapp}
               onChange={handleWhatsappChange}
             />
           </div>
+
           <div>
             <label
               htmlFor="interestArea"
               className="block text-sm font-medium text-slate-600 mb-1"
             >
-              Área de Interesse <span className="text-green-500">*</span>
+              Área de Interesse <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <select
@@ -191,7 +179,7 @@ export default function SubscriptionForm({
                 name="interestArea"
                 required
                 defaultValue=""
-                className="w-full appearance-none px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-400/20 transition-all duration-300"
+                className="w-full appearance-none px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/20"
               >
                 <option value="" disabled>
                   Selecione uma área
@@ -218,10 +206,10 @@ export default function SubscriptionForm({
           </button>
           <button
             type="submit"
-            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-500 text-white font-bold rounded-lg shadow-lg shadow-[#8B1A3B]/20 hover:bg-green-800 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#6A0E29]/30 transition-all duration-300 ease-in-out"
+            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700"
           >
             <Send size={18} />
-            <span>Enviar Contato</span>
+            <span>Enviar e ir para WhatsApp</span>
           </button>
         </div>
       </form>

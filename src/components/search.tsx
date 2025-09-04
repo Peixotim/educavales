@@ -1,5 +1,3 @@
-// SearchSection.tsx (CORRIGIDO)
-
 import { Search, List, Flame, Star, Award } from "lucide-react";
 
 interface SearchSectionProps {
@@ -15,12 +13,9 @@ export default function SearchSection({
   activeFilter,
   onFilterChange,
 }: SearchSectionProps) {
-  // Array de filtros com as KEYS CORRIGIDAS para corresponder aos dados
   const filters = [
     { key: "todos", label: "Todas as Areas", Icon: List },
-    // CORRIGIDO: de "mais_clicados" para "isPopular"
     { key: "isPopular", label: "Mais Populares", Icon: Flame },
-    // CORRIGIDO: de "lancamentos" para "isLaunch"
     { key: "isLaunch", label: "Lançamentos", Icon: Star },
     { key: "crea", label: "Cursos CREA", Icon: Award },
   ];

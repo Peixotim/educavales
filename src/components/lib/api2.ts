@@ -1,36 +1,82 @@
-// Definimos um tipo para os dados que o formulário enviará
-type SubscriptionData = {
-  fullName: string;
-  email: string;
-  whatsapp: string;
-  interestArea: string;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+// ✅ TIPO DE DADO ATUALIZADO para corresponder ao banco de dados
+export type SubscriptionData = {
+  name: string;
+  phone: string;
+  enterpriseId: number;
+  areaOfInterest: string;
 };
 
-export async function submitSubscription2(data: SubscriptionData) {
+// --- FUNÇÕES DE AUTENTICAÇÃO (sem alterações) ---
 
-  // Mudar o end point da api depois
-  const API_ENDPOINT = '/api/subscribe'; //Api
-
+export async function refreshToken(): Promise<string> {
   try {
+    if (!API_BASE_URL || !process.env.NEXT_PUBLIC_CLIENT_ID || !process.env.NEXT_PUBLIC_CLIENT_SECRET) {
+      throw new Error("Variáveis de ambiente da API não configuradas. Verifique o .env.local");
+    }
+    const response = await fetch(`${API_BASE_URL}/trocarRota`, { // Verifique esta rota
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+        clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Falha ao gerar token de acesso.");
+    }
+    const data = await response.json();
+    localStorage.setItem("apiToken", data.token);
+    localStorage.setItem("tokenExpiry", (Date.now() + 30 * 24 * 60 * 60 * 1000).toString());
+    return data.token;
+  } catch (error) {
+    console.error("Erro em refreshToken:", error);
+    throw error;
+  }
+}
+
+export async function getToken(): Promise<string> {
+  try {
+    const token = localStorage.getItem("apiToken");
+    const expiry = Number(localStorage.getItem("tokenExpiry") || 0);
+    if (!token || Date.now() > expiry) {
+      return await refreshToken();
+    }
+    return token;
+  } catch (error) {
+    console.error("Erro em getToken:", error);
+    throw error;
+  }
+}
+
+// --- FUNÇÃO DE ENVIO ---
+
+export async function submitSubscription2(data: SubscriptionData) {
+  try {
+    if (!API_BASE_URL) {
+      throw new Error("A URL da API não está configurada. Verifique o arquivo .env.local");
+    }
+    const token = await getToken();
+    const API_ENDPOINT = `${API_BASE_URL}/api/subscribe`; // Endpoint da sua nova função
+
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
 
-    // Se a resposta da API não for de sucesso (ex: erro 500, 400), lança um erro
     if (!response.ok) {
-      throw new Error('Houve um problema ao enviar seus dados.');
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Houve um problema ao enviar seus dados.');
     }
-
-    // Se deu tudo certo, retorna a resposta
     return await response.json();
-
   } catch (error) {
     console.error('Falha ao conectar com a API:', error);
-    // Lança o erro novamente para que o componente possa tratá-lo
     throw error;
   }
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { submitSubscription } from "../lib/api";
 
 type ModalProps = {
   isOpen: boolean;

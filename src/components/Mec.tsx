@@ -1,11 +1,8 @@
 "use client";
-
-// MUDANÇA 1: Importar useState e os componentes do Modal
-import { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import Link from "next/link";
 import {
   CheckCircle,
-  Award,
   ShieldCheck,
   Globe,
   Users2,
@@ -20,10 +17,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
+import { motion } from "framer-motion";
 import Modal from "./modalContactsCourses/modal";
-import SubscriptionForm from "./modalContactsCourses/SubscriptionForm"; // Ajuste o caminho se necessário // Ajuste o caminho se necessário
-import { submitSubscription } from "./lib/api";
+import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
+import { submitSubscription2 } from "./lib/api2";
 
 const advantages = [
   { text: "Certificado com registro no MEC" },
@@ -58,17 +55,15 @@ const features = [
 ];
 
 export function MecCertificationSection() {
-  // MUDANÇA 2: Lógica completa para controlar o Modal e o Formulário
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formStatus, setFormStatus] = useState<"form" | "loading" | "success">(
     "form"
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
-
-  const WHATSAPP_NUMBER = "5531999999999"; // 👈 SEU NÚMERO DE WHATSAPP AQUI
+  const WHATSAPP_NUMBER = "5531999999999";
 
   const openModal = () => {
-    setFormStatus("form"); // Reseta o formulário sempre que abrir
+    setFormStatus("form");
     setIsModalOpen(true);
   };
   const closeModal = () => setIsModalOpen(false);
@@ -78,21 +73,25 @@ export function MecCertificationSection() {
     setFormStatus("loading");
     try {
       const formData = new FormData(event.currentTarget);
+
       const data = {
-        fullName: formData.get("name") as string,
+        name: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        interestArea: formData.get("interestArea") as string,
-        course: "Area Desejada", // Conteúdo selecionado
+
+        areaOfInterest: formData.get("interestArea") as string,
+        enterpriseId: 1, // Defina o ID correto da empresa aqui
       };
 
-      // Simulação de chamada de API
-      // await submitSubscription(data);
+      await submitSubscription2(data);
 
-      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.fullName}.`;
+      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.name}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {
-      console.error("Erro:", error);
+      console.error("Erro ao enviar formulário:", error);
+      alert(
+        "Houve um erro ao enviar sua inscrição. Por favor, tente novamente."
+      );
       setFormStatus("form");
     }
   };
@@ -111,7 +110,6 @@ export function MecCertificationSection() {
       transition: { staggerChildren: 0.2, delayChildren: 0.1 },
     },
   };
-
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
@@ -138,20 +136,17 @@ export function MecCertificationSection() {
                   <CheckCircle className="mr-2 h-4 w-4" />
                   CERTIFICAÇÃO OFICIAL MEC
                 </Badge>
-
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-slate-800">
-                  Certificado
+                  Certificado{" "}
                   <span className="block text-green-600">
                     Autorizado pelo MEC
                   </span>
                 </h2>
-
                 <p className="text-lg text-slate-600 leading-relaxed">
                   Todos os nossos cursos possuem certificação reconhecida pelo
                   Ministério da Educação (MEC), garantindo validade nacional e
                   reconhecimento no mercado de trabalho.
                 </p>
-
                 <div>
                   <h3 className="font-semibold text-slate-800 mb-4">
                     Vantagens do Certificado MEC:
@@ -165,17 +160,14 @@ export function MecCertificationSection() {
                     ))}
                   </ul>
                 </div>
-
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  {/* MUDANÇA 3: O botão agora chama a função openModal */}
                   <Button
                     size="lg"
                     onClick={openModal}
                     className="font-bold text-green-900 shadow-lg shadow-green-500/20 transition-all hover:shadow-xl hover:shadow-green-500/30 hover:-translate-y-0.5"
                     style={{ backgroundColor: "#c7ffd7" }}
                   >
-                    Garantir Minha Vaga
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    Garantir Minha Vaga <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <Button size="lg" variant="outline" asChild>
                     <Link
@@ -206,7 +198,6 @@ export function MecCertificationSection() {
                     </Badge>
                   </CardHeader>
                 </Card>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {features.map((feature, index) => (
                     <motion.div
@@ -236,14 +227,12 @@ export function MecCertificationSection() {
         </div>
       </section>
 
-      {/* MUDANÇA 4: O Modal é renderizado aqui e controlado pelo estado */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <SubscriptionForm
           status={formStatus}
           onSubmit={handleFormSubmit}
           onCancel={closeModal}
           onSuccessRedirect={handleWhatsAppRedirect}
-          selectedContent={"Certificação Oficial MEC"}
         />
       </Modal>
     </>
