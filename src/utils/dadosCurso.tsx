@@ -1,5 +1,3 @@
-// Salve em: utils/dadosCurso.ts
-
 export interface AreaInformationsProps {
   title: string;
   img: { src: string; alt: string };
@@ -19,7 +17,6 @@ export interface AreaInformationsProps {
 
 export default function StoragedAreaInfo(): AreaInformationsProps[] {
   return [
-    // --- 1. Arte, Moda e Música ---
     {
       title: "Arte, Moda e Música",
       img: {
@@ -57,7 +54,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 2. Ciências Agrárias e Veterinária ---
     {
       title: "Ciências Agrárias e Veterinária",
       img: {
@@ -94,8 +90,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Médico Veterinário",
       },
     },
-
-    // --- 3. Ciências Contábeis ---
     {
       title: "Ciências Contábeis",
       img: {
@@ -132,8 +126,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Gerente de Controladoria",
       },
     },
-
-    // --- 4. Ciências Religiosas ---
     {
       title: "Ciências Religiosas – Conhecimento e Diálogo",
       img: {
@@ -170,8 +162,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Líder Comunitário",
       },
     },
-
-    // --- 5. Ciências Sociais ---
     {
       title: "Ciências Sociais – Analise e Transforme a Sociedade",
       img: {
@@ -208,8 +198,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Pesquisadora em Políticas Sociais",
       },
     },
-
-    // --- 6. Coaching ---
     {
       title: "Coaching – Desenvolva Pessoas e Carreiras",
       img: {
@@ -246,8 +234,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Coach Executivo",
       },
     },
-
-    // --- 7. Comunicação Social ---
     {
       title: "Comunicação Social – Conecte e Engaje Pessoas",
       img: {
@@ -284,8 +270,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Gerente de Mídias Sociais",
       },
     },
-
-    // --- 8. Educação Física ---
     {
       title: "Educação Física – Performance, Saúde e Treinamento",
       img: {
@@ -360,8 +344,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Diretora Escolar",
       },
     },
-
-    // --- 10. Empresarial ---
     {
       title: "Gestão Empresarial – Lidere com Estratégia",
       img: {
@@ -398,8 +380,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Gerente de Projetos (PMP)",
       },
     },
-
-    // --- 11. Engenharia e Arquitetura ---
     {
       title: "Engenharia e Arquitetura – Projete o Futuro",
       img: {
@@ -437,7 +417,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 12. Esportes ---
     {
       title: "Gestão de Esportes – Paixão que Vira Negócio",
       img: {
@@ -474,8 +453,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Preparador Físico de Futebol",
       },
     },
-
-    // --- 13. Estética ---
     {
       title: "Estética e Cosmetologia – Beleza e Bem-Estar",
       img: {
@@ -513,7 +490,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 14. Farmácia ---
     {
       title: "Farmácia – Cuidado Farmacêutico e Gestão",
       img: {
@@ -550,8 +526,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Farmacêutico Hospitalar",
       },
     },
-
-    // --- 15. Fisioterapia ---
     {
       title: "Fisioterapia – Reabilitação e Performance",
       img: {
@@ -588,8 +562,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Fisioterapeuta Esportiva",
       },
     },
-
-    // --- 16. Gastronomia ---
     {
       title: "Gastronomia – Gestão e Inovação na Cozinha",
       img: {
@@ -626,8 +598,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Chef e Proprietário de Restaurante",
       },
     },
-
-    // --- 17. Gestão, Economia e Finanças ---
     {
       title: "Gestão, Economia e Finanças – Visão Estratégica",
       img: {
@@ -664,8 +634,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Diretor Financeiro (CFO)",
       },
     },
-
-    // --- 18. Jurídico ---
     {
       title: "Área Jurídica – Construa uma Carreira de Destaque",
       img: {
@@ -702,8 +670,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Advogada Especialista em LGPD",
       },
     },
-
-    // --- 19. Logística ---
     {
       title: "Logística e Supply Chain – Eficiência que Gera Lucro",
       img: {
@@ -740,8 +706,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Gerente de Logística",
       },
     },
-
-    // --- 20. Marketing ---
     {
       title: "Marketing Digital e Vendas – Estratégias Vencedoras",
       img: {
@@ -779,7 +743,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 21. MBA ---
     {
       title: "MBA Executivo – Prepare-se para o Topo",
       img: {
@@ -816,8 +779,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Diretor de Operações (COO)",
       },
     },
-
-    // --- 22. Meio Ambiente ---
     {
       title: "Meio Ambiente – Gestão e Sustentabilidade",
       img: {
@@ -854,8 +815,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
         cargo: "Consultora Ambiental",
       },
     },
-
-    // --- 23. Nutrição ---
     {
       title: "Nutrição – Saúde do Prato à Performance",
       img: {
@@ -893,7 +852,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 24. Psicologia ---
     {
       title: "Psicologia – Novas Abordagens e Práticas Clínicas",
       img: {
@@ -931,7 +889,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 25. Saúde e Bem-Estar ---
     {
       title: "Saúde e Bem-Estar – Gestão e Cuidado Integrado",
       img: {
@@ -969,7 +926,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 26. Segurança Pública ---
     {
       title: "Segurança Pública – Estratégia e Gestão",
       img: {
@@ -1007,7 +963,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 27. Serviço Social ---
     {
       title: "Serviço Social – Impacto e Cidadania na Prática",
       img: {
@@ -1045,7 +1000,6 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
       },
     },
 
-    // --- 28. T.I ---
     {
       title: "Tecnologia da Informação – Inovação que Move o Futuro",
       img: {
