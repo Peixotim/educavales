@@ -1,8 +1,6 @@
-// components/CardPage.tsx
-
 import { Clock, Users, ShieldCheck, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { slugify } from "@/utils/slugify"; // Garanta que o caminho para seu slugify está correto
+import { slugify } from "@/utils/slugify";
 
 export interface CardPageProps {
   title: string;
@@ -27,7 +25,6 @@ export default function CardPage({
   studentCount,
   certifiedByMEC,
 }: CardPageProps) {
-  // 1. Cria uma URL amigável a partir do título do curso
   const courseSlug = slugify(title);
 
   return (
@@ -88,9 +85,8 @@ export default function CardPage({
           )}
         </div>
         <div className="mt-auto">
-          {/* 2. O Link aponta para a URL dinâmica correta */}
           <Link
-            href={`/cursos/${courseSlug}`} // Este caminho está correto para a página que criamos
+            href={`/cursos/${courseSlug}`}
             className="group/button flex w-full items-center justify-center gap-3 rounded-lg bg-slate-900 px-6 py-3 text-center font-bold text-white shadow-sm shadow-slate-900/30 transition-all duration-300 hover:bg-slate-700 hover:shadow-lg hover:shadow-slate-700/40"
           >
             <span>Ver Detalhes da Area</span>

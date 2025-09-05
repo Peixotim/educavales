@@ -9,7 +9,6 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-// --- Componentes internos de estado (Loading, Success) ---
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
     <Loader2 className="h-12 w-12 text-green-500 animate-spin" />
@@ -50,7 +49,7 @@ const SuccessState = ({
   </div>
 );
 
-// --- Props do Formulário ---
+//Props do formulario
 type SubscriptionFormProps = {
   status: "form" | "loading" | "success";
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

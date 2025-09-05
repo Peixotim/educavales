@@ -12,7 +12,6 @@ const Footer = () => {
   return (
     <footer className="bg-slate-900 text-slate-400">
       <div className="container mx-auto px-4">
-        {/* Seção CTA - Inspirado no Hero */}
         <div className="py-12 border-b border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
@@ -42,10 +41,7 @@ const Footer = () => {
             </form>
           </div>
         </div>
-
-        {/* Conteúdo Principal do Rodapé */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Coluna 1: Logo e Redes Sociais */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-[#16a34a]/10 rounded-lg flex items-center justify-center ring-1 ring-[#16a34a]/20">
@@ -91,8 +87,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          {/* Coluna 2: Cursos */}
           <div>
             <h4 className="text-lg font-semibold text-white tracking-wider mb-6">
               Cursos
@@ -116,8 +110,6 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          {/* Coluna 3: Links Úteis */}
           <div>
             <h4 className="text-lg font-semibold text-white tracking-wider mb-6">
               Links Úteis
@@ -139,11 +131,8 @@ const Footer = () => {
                   Contato
                 </a>
               </li>
-              {/* Adicione outros links se necessário */}
             </ul>
           </div>
-
-          {/* Coluna 4: Contato */}
           <div>
             <h4 className="text-lg font-semibold text-white tracking-wider mb-6">
               Entre em Contato
@@ -174,8 +163,6 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-
-        {/* Copyright */}
         <div className="mt-8 py-8 border-t border-slate-800 text-center">
           <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} EducaVale. Todos os direitos

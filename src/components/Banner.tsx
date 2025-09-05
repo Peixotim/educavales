@@ -25,8 +25,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "./lib/utils";
 import { submitSubscription2 } from "./lib/api2";
-
-// --- Dados e Componentes de Abas ---
 const plans = [
   {
     title: "1 Pós-Graduação",
@@ -141,19 +139,18 @@ const InfoTabContent = () => {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
-  // ✅ CORREÇÕES APLICADAS AQUI
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("loading");
     try {
       const formData = new FormData(event.currentTarget);
 
-      // Objeto de dados ajustado para o formato da API
+      //Dados a serem enviados para a API
       const data = {
         name: formData.get("fullName") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1, // Adicionado o ID da empresa
+        enterpriseId: 1, // Mudar o id da empresa
       };
 
       await submitSubscription2(data);

@@ -60,7 +60,7 @@ export function MecCertificationSection() {
     "form"
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
-  const WHATSAPP_NUMBER = "5531999999999";
+  const WHATSAPP_NUMBER = "5531991398980"; //Numero da empresa
 
   const openModal = () => {
     setFormStatus("form");
@@ -127,7 +127,6 @@ export function MecCertificationSection() {
               viewport={{ once: true, amount: 0.2 }}
               variants={containerVariants}
             >
-              {/* Coluna da Esquerda */}
               <motion.div className="space-y-6" variants={itemVariants}>
                 <Badge
                   variant="outline"
@@ -179,8 +178,6 @@ export function MecCertificationSection() {
                   </Button>
                 </div>
               </motion.div>
-
-              {/* Coluna da Direita */}
               <motion.div className="space-y-6" variants={itemVariants}>
                 <Card className="bg-white border-slate-200">
                   <CardHeader className="items-center text-center p-6">

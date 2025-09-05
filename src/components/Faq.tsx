@@ -47,13 +47,10 @@ export default function FaqSection() {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    // MUDANÇA: Fundo da seção agora é um cinza bem claro para dar profundidade
     <section className="py-16 sm:py-24">
       <div className="w-full max-w-6xl mx-auto px-4">
-        {/* MUDANÇA: Container principal agora é branco, com borda e sombra suaves */}
         <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
           <div className="p-6 md:p-8">
-            {/* MUDANÇA: Cores do título e subtítulo ajustadas para o tema light */}
             <h3 className="text-2xl sm:text-3xl font-bold text-center text-slate-800 tracking-tight flex items-center justify-center gap-3">
               <HelpCircle className="w-7 h-7 text-green-600" />
               <span>Perguntas Frequentes</span>
@@ -64,16 +61,14 @@ export default function FaqSection() {
           </div>
 
           <div className="flex flex-col md:flex-row border-t border-slate-200">
-            {/* MUDANÇA: Cor da borda da coluna de perguntas */}
             <div className="flex md:flex-col justify-around md:justify-start p-4 md:p-6 border-b-2 md:border-b-0 md:border-r-2 border-slate-200">
               {faqData.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => setActiveIndex(item.id)}
-                  // MUDANÇA: Estilos dos botões ATIVO e INATIVO refeitos para o tema light
                   className={`w-full text-left p-3 sm:p-4 rounded-lg transition-all duration-300 text-sm sm:text-base font-semibold ${
                     activeIndex === item.id
-                      ? "text-slate-900 scale-105" // O fundo verde é aplicado via style abaixo
+                      ? "text-slate-900 scale-105"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                   }`}
                   style={{
@@ -96,7 +91,6 @@ export default function FaqSection() {
                   transition={{ duration: 0.3 }}
                   className="min-h-[220px] sm:min-h-[200px]"
                 >
-                  {/* MUDANÇA: Cores do texto da resposta ajustadas para o tema light */}
                   <h4 className="text-xl sm:text-2xl font-bold mb-3 flex items-center gap-3 text-slate-800">
                     <ChevronRight className="w-6 h-6 p-1 rounded-full bg-green-500/20 text-green-700 flex-shrink-0" />
                     <span>{faqData[activeIndex - 1].question}</span>

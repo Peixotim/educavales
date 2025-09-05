@@ -1,5 +1,3 @@
-// Salve em: app/cursos/[slug]/page.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -83,25 +81,22 @@ export default function PaginaDeDetalhesDoCurso() {
   };
   const closeModal = () => setIsModalOpen(false);
 
-  // ✅ OBJETO DE DADOS E MENSAGEM ATUALIZADOS
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
     try {
       const formData = new FormData(event.currentTarget);
 
-      // Objeto de dados alinhado com o que a API espera
       const data = {
         name: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1, // Defina o ID correto da empresa aqui
+        enterpriseId: 1, //Mudar o id da empresa
       };
 
       console.log("🚀 Enviando para a API:", data);
       await submitSubscription2(data);
 
-      // Mensagem do WhatsApp sem o e-mail
       const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.name}.`;
       setWhatsappMessage(message);
       setFormStatus("success");

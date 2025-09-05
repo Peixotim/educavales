@@ -41,29 +41,17 @@ export default function Contact() {
       value: "R. Rio Doce, 50 - Professores, Cel. Fabriciano - MG, 35170-112",
     },
   ];
-
-  // Estados para armazenar os valores dos campos do formulário
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  // Função que é chamada ao enviar o formulário
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Seu número de WhatsApp (código do país + DDD + número)
     const whatsappNumber = "5531991398980";
-
-    // Monta a mensagem final com os dados dos estados
     const finalMessage = `Olá! Meu nome é ${name} (email: ${email}) e meu questionamento é: "${message}"`;
-
-    // Codifica a mensagem para ser usada em uma URL
     const encodedMessage = encodeURIComponent(finalMessage);
-
-    // Cria o link completo do WhatsApp
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-    // Abre o WhatsApp em uma nova aba
     window.open(whatsappUrl, "_blank");
   };
 
@@ -71,7 +59,6 @@ export default function Contact() {
     <section className="py-16 sm:py-24">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Coluna da Esquerda: Informações e Contatos Diretos */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -120,7 +107,6 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Coluna da Direita: Formulário de Contato */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}

@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// ✅ TIPO DE DADO ATUALIZADO para corresponder ao banco de dados
+//Tipo de dados que a API vai receber
 export type SubscriptionData = {
   name: string;
   phone: string;
@@ -8,14 +8,14 @@ export type SubscriptionData = {
   areaOfInterest: string;
 };
 
-// --- FUNÇÕES DE AUTENTICAÇÃO (sem alterações) ---
+//Funcao de autenticacao de 30 em 30 dias
 
 export async function refreshToken(): Promise<string> {
   try {
     if (!API_BASE_URL || !process.env.NEXT_PUBLIC_CLIENT_ID || !process.env.NEXT_PUBLIC_CLIENT_SECRET) {
       throw new Error("Variáveis de ambiente da API não configuradas. Verifique o .env.local");
     }
-    const response = await fetch(`${API_BASE_URL}/trocarRota`, { // Verifique esta rota
+    const response = await fetch(`${API_BASE_URL}/trocarRota`, { //Trocar a rota depois
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -51,7 +51,7 @@ export async function getToken(): Promise<string> {
   }
 }
 
-// --- FUNÇÃO DE ENVIO ---
+//Funcao de enviar
 
 export async function submitSubscription2(data: SubscriptionData) {
   try {
@@ -59,7 +59,7 @@ export async function submitSubscription2(data: SubscriptionData) {
       throw new Error("A URL da API não está configurada. Verifique o arquivo .env.local");
     }
     const token = await getToken();
-    const API_ENDPOINT = `${API_BASE_URL}/api/subscribe`; // Endpoint da sua nova função
+    const API_ENDPOINT = `${API_BASE_URL}/api/subscribe`; //Mudar o endPoint para o da API
 
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',

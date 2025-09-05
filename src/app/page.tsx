@@ -1,7 +1,4 @@
-// Seu arquivo de página principal (ex: app/page.tsx) - CORRIGIDO
-
 "use client";
-
 import { useState } from "react";
 import { Header } from "@/components/sidebar";
 
@@ -22,10 +19,9 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState("todos");
   const [visibleCount, setVisibleCount] = useState(CARDS_POR_PAGINA);
 
-  // CORREÇÃO: Nova função para lidar com a troca de filtro e resetar a paginação
   const handleFilterChange = (newFilter: string) => {
     setActiveFilter(newFilter);
-    setVisibleCount(CARDS_POR_PAGINA); // Reseta a contagem para 6 ao trocar de filtro
+    setVisibleCount(CARDS_POR_PAGINA);
   };
 
   const filteredCards = allCourses.filter((card) => {
@@ -34,10 +30,8 @@ export default function Home() {
       (card.title || "").toLowerCase().includes(searchTermLower) ||
       (card.description || "").toLowerCase().includes(searchTermLower);
 
-    // CORREÇÃO: A lógica de filtro foi atualizada e simplificada
     let matchesFilter = true;
     if (activeFilter === "isPopular" || activeFilter === "isLaunch") {
-      // Usamos a chave do filtro para acessar a propriedade do card dinamicamente
       matchesFilter = card[activeFilter] === true;
     } else if (activeFilter === "crea") {
       const isCreaRelated =
@@ -65,7 +59,7 @@ export default function Home() {
           searchTerm={searchTerm}
           onSearchChange={(e) => setSearchTerm(e.target.value)}
           activeFilter={activeFilter}
-          onFilterChange={handleFilterChange} // CORREÇÃO: Usando a nova função
+          onFilterChange={handleFilterChange}
         />
         <hr className="max-w-5xl mx-auto border-slate-200" />
 

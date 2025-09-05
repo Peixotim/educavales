@@ -28,8 +28,7 @@ export const Header = () => {
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
 
-  const WHATSAPP_NUMBER = "5531999999999"; // Substituir depois para o numero da empresa
-
+  const WHATSAPP_NUMBER = "5531991398980"; //Numero da empresa
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
