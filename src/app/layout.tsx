@@ -24,6 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="scroll-smooth scroll-pt-40">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="p8j7IGmPd_8IsEFdVTNRjDD2pJvACQRk_mAqWs6bc1M"
+        />
+      </head>
       <body className={montserrat.className}>{children}</body>
     </html>
   );
