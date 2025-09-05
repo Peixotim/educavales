@@ -73,7 +73,7 @@ export default function PaginaDeDetalhesDoCurso() {
     "form"
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
-  const WHATSAPP_NUMBER = "5531999999999";
+  const WHATSAPP_NUMBER = "5531991398980";
 
   const openModal = () => {
     setFormStatus("form");
