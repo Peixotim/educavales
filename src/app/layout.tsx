@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "EducaVales",
+  title: "EducaVale",
   description: "Cursos e certificações de qualidade",
   icons: {
     icon: "/images/favicon.ico",

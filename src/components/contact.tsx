@@ -20,8 +20,8 @@ export default function Contact() {
     {
       icon: <Phone className="h-6 w-6 text-green-600" />,
       label: "Telefone Suporte",
-      value: "(31) 91399-8980",
-      href: "tel:+55913998980",
+      value: "(31) 9139-8980",
+      href: "tel:+5591398980",
     },
     {
       icon: <Mail className="h-6 w-6 text-green-600" />,
