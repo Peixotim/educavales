@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll } from "framer-motion";
 import Modal from "@/components/modalContactsCourses/modal";
 import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm";
-import { submitSubscription2 } from "./lib/api2";
+import { submitSubscription } from "./lib/api";
+import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external";
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -36,7 +37,6 @@ export const Header = () => {
 
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  // ✅ CORREÇÕES APLICADAS AQUI
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
@@ -45,16 +45,16 @@ export const Header = () => {
 
       // Objeto de dados ajustado para o formato da API
       const data = {
-        name: formData.get("name") as string, // Corrigido de 'fullerName'
+        fullerName: formData.get("name") as string, // Corrigido de 'fullerName'
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string, // Corrigido
         enterpriseId: 1, // Corrigido
       };
 
-      await submitSubscription2(data);
+      await submitSubscription(data);
 
       // Mensagem do WhatsApp corrigida (sem email)
-      const message = `Olá! Meu nome é ${data.name} e tenho interesse na área de ${data.areaOfInterest}. Gostaria de mais informações.`;
+      const message = `Olá! Meu nome é ${data.fullerName} e tenho interesse na área de ${data.areaOfInterest}. Gostaria de mais informações.`;
       setWhatsappMessage(message);
 
       setFormStatus("success");

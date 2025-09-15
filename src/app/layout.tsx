@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import CookieConsent from "@/components/CookieConsent";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -9,12 +10,58 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "EducaVale",
-  description: "Cursos e certificações de qualidade",
+  metadataBase: new URL("http://faculdadeeducavale.com.br"),
+  title: {
+    default: "Faculdade EducaVale - Pós-graduação e MBA Reconhecidos pelo MEC",
+    template: "%s | Faculdade EducaVale",
+  },
+  description:
+    "Faculdade EducaVale: Pós-graduação e MBA 100% online, metodologia inovadora, professores especialistas e certificação reconhecida pelo MEC. Transforme sua carreira hoje!",
+  keywords: [
+    "faculdade",
+    "educavale",
+    "pós-graduação",
+    "mba",
+    "ensino a distância",
+    "ead",
+    "cursos online",
+  ],
+  authors: [{ name: "Faculdade EducaVale" }],
+  creator: "Faculdade EducaVale",
+  publisher: "Faculdade EducaVale",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "http://faculdadeeducavale.com.br",
+    siteName: "Faculdade EducaVale",
+    title: "Faculdade EducaVale - Pós-graduação e MBA Reconhecidos pelo MEC",
+    description:
+      "Cursos de Pós-graduação e MBA online reconhecidos pelo MEC. Avance na carreira com a EducaVale.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Faculdade EducaVale",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@faculdadeeducavale",
+    creator: "@faculdadeeducavale",
+    title: "Faculdade EducaVale",
+    description: "Cursos de Pós-graduação e MBA online reconhecidos pelo MEC.",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "http://faculdadeeducavale.com.br",
+  },
+  manifest: "/site.webmanifest",
   icons: {
-    icon: "/images/favicon.ico",
-    shortcut: "/images/favicon.ico",
-    apple: "/images/favicon.ico",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/icon-192x192.png",
   },
 };
 
@@ -46,7 +93,6 @@ export default function RootLayout({
         </Script>
 
         <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
           <img
             height="1"
             width="1"
@@ -56,7 +102,10 @@ export default function RootLayout({
           />
         </noscript>
       </head>
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

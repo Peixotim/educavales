@@ -20,7 +20,7 @@ import {
 import { motion } from "framer-motion";
 import Modal from "./modalContactsCourses/modal";
 import SubscriptionForm from "./modalContactsCourses/SubscriptionForm";
-import { submitSubscription2 } from "./lib/api2";
+import { submitSubscription } from "./lib/api";
 
 const advantages = [
   { text: "Certificado com registro no MEC" },
@@ -75,16 +75,16 @@ export function MecCertificationSection() {
       const formData = new FormData(event.currentTarget);
 
       const data = {
-        name: formData.get("name") as string,
+        fullerName: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
 
         areaOfInterest: formData.get("interestArea") as string,
         enterpriseId: 1, // Defina o ID correto da empresa aqui
       };
 
-      await submitSubscription2(data);
+      await submitSubscription(data);
 
-      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.name}.`;
+      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.fullerName}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Header } from "@/components/sidebar";
-
 import { MecCertificationSection } from "@/components/Mec";
 import Footer from "@/components/footer";
 import HeroPremium from "@/components/Banner";

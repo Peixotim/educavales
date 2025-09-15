@@ -24,7 +24,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "./lib/utils";
-import { submitSubscription2 } from "./lib/api2";
+import { submitSubscription } from "./lib/api";
+
 const plans = [
   {
     title: "1 Pós-Graduação",
@@ -147,13 +148,13 @@ const InfoTabContent = () => {
 
       //Dados a serem enviados para a API
       const data = {
-        name: formData.get("fullName") as string,
+        fullerName: formData.get("fullName") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
         enterpriseId: 1, // Mudar o id da empresa
       };
 
-      await submitSubscription2(data);
+      await submitSubscription(data);
       setStatus("success");
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);

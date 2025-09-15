@@ -131,6 +131,14 @@ const Footer = () => {
                   Contato
                 </a>
               </li>
+              <li>
+                <a
+                  href="/politica-de-privacidade"
+                  className="hover:text-[#16a34a] transition-colors"
+                >
+                  Politicas de Privacidade
+                </a>
+              </li>
             </ul>
           </div>
           <div>
@@ -168,6 +176,7 @@ const Footer = () => {
             © {new Date().getFullYear()} EducaVale. Todos os direitos
             reservados.
           </p>
+          <p className="text-sm text-slate-500">CPNJ: 37.911.890/0001-01</p>
         </div>
       </div>
     </footer>

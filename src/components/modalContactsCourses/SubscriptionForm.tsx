@@ -8,6 +8,7 @@ import {
   Loader2,
   MessageCircle,
 } from "lucide-react";
+import Link from "next/link";
 
 const LoadingState = () => (
   <div className="flex flex-col items-center justify-center h-80 text-center">
@@ -17,6 +18,7 @@ const LoadingState = () => (
     </p>
   </div>
 );
+
 const SuccessState = ({
   onSuccessRedirect,
   onClose,
@@ -49,7 +51,7 @@ const SuccessState = ({
   </div>
 );
 
-//Props do formulario
+// Props do formulário
 type SubscriptionFormProps = {
   status: "form" | "loading" | "success";
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -96,7 +98,10 @@ export default function SubscriptionForm({
 }: SubscriptionFormProps) {
   const inputStyle =
     "w-full px-4 py-3 bg-slate-100 border-2 border-transparent rounded-lg placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/20 transition-all";
+
   const [whatsapp, setWhatsapp] = useState("");
+  const [accepted, setAccepted] = useState(false);
+  const [showAcceptError, setShowAcceptError] = useState(false);
 
   const handleWhatsappChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\D/g, "");
@@ -127,7 +132,19 @@ export default function SubscriptionForm({
         Preencha seus dados para iniciar uma conversa.
       </p>
 
-      <form onSubmit={onSubmit} className="text-left">
+      <form
+        onSubmit={(e) => {
+          if (!accepted) {
+            // bloqueia envio se não aceitou
+            e.preventDefault();
+            setShowAcceptError(true);
+            return;
+          }
+          setShowAcceptError(false);
+          onSubmit(e);
+        }}
+        className="text-left"
+      >
         <div className="space-y-5">
           <div>
             <label
@@ -194,7 +211,48 @@ export default function SubscriptionForm({
               </div>
             </div>
           </div>
+
+          {/* Aceite da Política de Privacidade */}
+          <div
+            className={[
+              "rounded-lg border p-4 bg-white/60",
+              showAcceptError && !accepted
+                ? "border-red-300"
+                : "border-slate-200",
+            ].join(" ")}
+          >
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                className="mt-1 h-4 w-4 rounded border-slate-300 text-green-600 focus:ring-green-500"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+                aria-invalid={showAcceptError && !accepted}
+                aria-describedby="privacy-consent-hint"
+              />
+              <span className="text-sm text-slate-700">
+                Li e{" "}
+                <Link
+                  href="/politica-de-privacidade"
+                  target="_blank"
+                  className="font-medium text-green-700 underline underline-offset-2 hover:text-green-800"
+                >
+                  aceito a Política de Privacidade
+                </Link>{" "}
+                e autorizo o tratamento dos meus dados para contato.
+              </span>
+            </label>
+            {showAcceptError && !accepted && (
+              <p
+                id="privacy-consent-hint"
+                className="mt-2 text-xs text-red-600"
+              >
+                Você precisa aceitar a Política de Privacidade para enviar.
+              </p>
+            )}
+          </div>
         </div>
+
         <div className="flex items-center gap-4 pt-8">
           <button
             type="button"
@@ -203,9 +261,16 @@ export default function SubscriptionForm({
           >
             Cancelar
           </button>
+
           <button
             type="submit"
-            className="w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700"
+            disabled={!accepted}
+            className={[
+              "w-full flex-1 px-6 py-3 flex items-center justify-center gap-2 rounded-lg font-bold shadow-lg transition-colors",
+              accepted
+                ? "bg-green-600 text-white hover:bg-green-700"
+                : "bg-slate-300 text-slate-500 cursor-not-allowed",
+            ].join(" ")}
           >
             <Send size={18} />
             <span>Enviar e ir para WhatsApp</span>

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useParams, notFound, useRouter } from "next/navigation";
 import { slugify } from "@/utils/slugify";
@@ -9,6 +8,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+
 import {
   ArrowLeft,
   CheckCircle2,
@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import Modal from "@/components/modalContactsCourses/modal";
 import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm";
-import { submitSubscription2 } from "@/components/lib/api2";
+import { submitSubscription } from "@/components/lib/api";
 
 type Plan = {
   title: string;
@@ -88,16 +88,16 @@ export default function PaginaDeDetalhesDoCurso() {
       const formData = new FormData(event.currentTarget);
 
       const data = {
-        name: formData.get("name") as string,
+        fullerName: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1, //Mudar o id da empresa
+        enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 1, //Mudar o id da empresa
       };
 
       console.log("🚀 Enviando para a API:", data);
-      await submitSubscription2(data);
+      await submitSubscription(data);
 
-      const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.name}.`;
+      const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.fullerName}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {

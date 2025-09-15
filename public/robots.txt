@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://faculdadeeducavale.com.br/sitemap.xml
