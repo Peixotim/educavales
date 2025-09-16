@@ -10,7 +10,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem("cookieConsent");
     if (!consent) {
-      setShow(true);
+      setShow(true)
     }
   }, []);
 

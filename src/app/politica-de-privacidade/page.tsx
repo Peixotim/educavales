@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation"; // Importa o hook de roteamento
+
 import {
   ShieldCheck,
   FileText,
@@ -9,7 +9,8 @@ import {
   Database,
   Mail,
   Globe2,
-  ArrowLeft, // Importa o ícone de seta
+  ArrowLeft,
+  Link, // Importa o ícone de seta
 } from "lucide-react";
 
 export default function PoliticaDePrivacidade() {
@@ -19,12 +20,12 @@ export default function PoliticaDePrivacidade() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-100 via-transparent to-transparent" />
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
           <div className="mb-8">
-            <a href="/">
+            <Link href="/">
               <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 hover">
                 <ArrowLeft className="h-4 w-4" />
                 Voltar
               </button>
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">

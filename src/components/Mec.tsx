@@ -75,7 +75,7 @@ export function MecCertificationSection() {
       const formData = new FormData(event.currentTarget);
 
       const data = {
-        fullerName: formData.get("name") as string,
+        name: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
 
         areaOfInterest: formData.get("interestArea") as string,
@@ -84,7 +84,7 @@ export function MecCertificationSection() {
 
       await submitSubscription(data);
 
-      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.fullerName}.`;
+      const message = `Olá! Tenho interesse na Certificação Oficial MEC. Meu nome é ${data.name}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {

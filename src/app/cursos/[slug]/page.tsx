@@ -88,7 +88,7 @@ export default function PaginaDeDetalhesDoCurso() {
       const formData = new FormData(event.currentTarget);
 
       const data = {
-        fullerName: formData.get("name") as string,
+        name: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
         enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 1, //Mudar o id da empresa
@@ -97,7 +97,7 @@ export default function PaginaDeDetalhesDoCurso() {
       console.log("🚀 Enviando para a API:", data);
       await submitSubscription(data);
 
-      const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.fullerName}.`;
+      const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.name}.`;
       setWhatsappMessage(message);
       setFormStatus("success");
     } catch (error) {

@@ -9,7 +9,6 @@ import { motion, useScroll } from "framer-motion";
 import Modal from "@/components/modalContactsCourses/modal";
 import SubscriptionForm from "@/components/modalContactsCourses/SubscriptionForm";
 import { submitSubscription } from "./lib/api";
-import { isHmrRefresh } from "next/dist/server/app-render/work-unit-async-storage.external";
 
 const menuItems = [
   { name: "Início", href: "#inicio" },
@@ -17,6 +16,27 @@ const menuItems = [
   { name: "Faq", href: "#Faq" },
   { name: "Contato", href: "#contato" },
 ];
+
+function onlyDigits(v: string): string {
+  return (v || "").replace(/\D/g, "");
+}
+function normalizePhone(raw: string): string {
+  const digits = onlyDigits(raw);
+  if (!digits) return "";
+  return digits.startsWith("55") ? digits : `55${digits}`;
+}
+function toSafeNumber(value: unknown, fallback = 1): number {
+  const n = Number(value);
+  return Number.isFinite(n) && !Number.isNaN(n) ? n : fallback;
+}
+function getErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  try {
+    return String(e);
+  } catch {
+    return "Erro inesperado.";
+  }
+}
 
 export const Header = () => {
   const [menuState, setMenuState] = React.useState(false);
@@ -29,38 +49,47 @@ export const Header = () => {
   );
   const [whatsappMessage, setWhatsappMessage] = useState("");
 
-  const WHATSAPP_NUMBER = "5531991398980"; //Numero da empresa
+  const WHATSAPP_NUMBER = "5531991398980";
+
   const openModal = () => {
     setFormStatus("form");
     setIsModalOpen(true);
   };
-
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFormStatus("loading");
+
     try {
       const formData = new FormData(event.currentTarget);
 
-      // Objeto de dados ajustado para o formato da API
-      const data = {
-        fullerName: formData.get("name") as string, // Corrigido de 'fullerName'
-        phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
-        areaOfInterest: formData.get("interestArea") as string, // Corrigido
-        enterpriseId: 1, // Corrigido
-      };
+      const name = ((formData.get("name") as string) || "").trim();
+      const areaOfInterest = (
+        (formData.get("interestArea") as string) || ""
+      ).trim();
+      const phone = normalizePhone((formData.get("whatsapp") as string) || "");
+      const enterpriseId = toSafeNumber(
+        process.env.NEXT_PUBLIC_ENTERPRISE_ID,
+        1
+      );
 
-      await submitSubscription(data);
+      if (!name || !areaOfInterest || phone.length < 12) {
+        setFormStatus("form");
+        alert("Verifique os dados: nome, área de interesse e WhatsApp.");
+        return;
+      }
 
-      // Mensagem do WhatsApp corrigida (sem email)
-      const message = `Olá! Meu nome é ${data.fullerName} e tenho interesse na área de ${data.areaOfInterest}. Gostaria de mais informações.`;
+      await submitSubscription({ name, areaOfInterest, phone, enterpriseId });
+
+      const message = `Olá! Meu nome é ${name} e tenho interesse na área de ${areaOfInterest}. Gostaria de mais informações.`;
       setWhatsappMessage(message);
 
       setFormStatus("success");
-    } catch (error) {
-      console.error("Erro ao enviar o formulário:", error);
-      alert("Houve um problema. Tente novamente.");
+    } catch (err: unknown) {
+      const msg = getErrorMessage(err);
+      console.error("Erro ao enviar o formulário:", msg);
+      alert(msg || "Houve um problema. Tente novamente.");
       setFormStatus("form");
     }
   };
