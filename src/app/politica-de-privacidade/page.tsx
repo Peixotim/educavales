@@ -10,34 +10,45 @@ import {
   Mail,
   Globe2,
   ArrowLeft,
-  Link, // Importa o ícone de seta
+  Cookie, // Usando o ícone Cookie diretamente do Lucide
 } from "lucide-react";
 
 export default function PoliticaDePrivacidade() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100">
+    <main className="min-h-screen bg-neutral-900 text-gray-200">
+      {" "}
+      {/* Fundo principal escuro, texto padrão cinza claro */}
       <section className="relative">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-100 via-transparent to-transparent" />
+        {/* Gradiente radial removido para consistência com o tema escuro */}
+        {/* <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-100 via-transparent to-transparent" /> */}
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
           <div className="mb-8">
-            <Link href="/">
-              <button className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 hover">
+            <a href="/">
+              {" "}
+              {/* Usando <a> para navegação */}
+              <button className="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-2 text-sm font-medium text-gray-200 shadow-sm hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2">
                 <ArrowLeft className="h-4 w-4" />
                 Voltar
               </button>
-            </Link>
+            </a>
           </div>
 
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-700 bg-emerald-900 px-3 py-1 text-xs font-medium text-emerald-200">
+                {" "}
+                {/* Badge adaptado */}
                 <ShieldCheck className="h-4 w-4" />
                 LGPD & Política de Privacidade
               </div>
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+              <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+                {" "}
+                {/* Título adaptado */}
                 Transparência e segurança dos seus dados
               </h1>
-              <p className="mt-3 max-w-2xl text-slate-600">
+              <p className="mt-3 max-w-2xl text-gray-300">
+                {" "}
+                {/* Parágrafo adaptado */}
                 Valorizamos sua privacidade. Nesta página explicamos como
                 coletamos, usamos, armazenamos e protegemos seus dados pessoais
                 em conformidade com a Lei Geral de Proteção de Dados (Lei nº
@@ -45,19 +56,28 @@ export default function PoliticaDePrivacidade() {
               </p>
             </div>
 
-            <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="w-full max-w-sm rounded-2xl border border-neutral-700 bg-neutral-800 p-5 shadow-sm">
+              {" "}
+              {/* Card de resumo adaptado */}
               <div className="flex items-center gap-3">
-                <Lock className="h-5 w-5 text-emerald-600" />
-                <p className="text-sm font-semibold text-slate-900">
+                <Lock className="h-5 w-5 text-emerald-500" />{" "}
+                {/* Cor do ícone ajustada */}
+                <p className="text-sm font-semibold text-white">
+                  {" "}
+                  {/* Texto adaptado */}
                   Resumo rápido
                 </p>
               </div>
-              <ul className="mt-3 space-y-2 text-sm text-slate-600">
+              <ul className="mt-3 space-y-2 text-sm text-gray-300">
+                {" "}
+                {/* Lista adaptada */}
                 <li>• Base legal adequada para cada tratamento</li>
                 <li>• Direitos do titular garantidos</li>
                 <li>• Segurança, retenção e descarte responsáveis</li>
               </ul>
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs text-gray-400">
+                {" "}
+                {/* Texto adaptado */}
                 Última atualização:{" "}
                 <span className="font-medium">15/09/2025</span>
               </p>
@@ -65,13 +85,16 @@ export default function PoliticaDePrivacidade() {
           </div>
         </div>
       </section>
-
       {/* Conteúdo */}
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="grid gap-8 md:grid-cols-[280px,1fr]">
           {/* Índice lateral */}
-          <aside className="top-24 h-max rounded-2xl border border-slate-200 bg-white/60 p-5 shadow-sm backdrop-blur">
-            <p className="mb-3 text-sm font-semibold text-slate-900">
+          <aside className="top-24 h-max rounded-2xl border border-neutral-700 bg-neutral-800/60 p-5 shadow-sm backdrop-blur">
+            {" "}
+            {/* Aside adaptado */}
+            <p className="mb-3 text-sm font-semibold text-white">
+              {" "}
+              {/* Texto adaptado */}
               Navegação rápida
             </p>
             <nav className="space-y-2 text-sm">
@@ -92,7 +115,7 @@ export default function PoliticaDePrivacidade() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className="block rounded-md px-2 py-1 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                  className="block rounded-md px-2 py-1 text-gray-300 hover:bg-neutral-700 hover:text-white" // Links adaptados
                 >
                   {label}
                 </a>
@@ -104,45 +127,51 @@ export default function PoliticaDePrivacidade() {
           <article className="space-y-8">
             <Section
               id="introducao"
-              icon={<FileText className="h-5 w-5 text-emerald-600" />}
+              icon={<FileText className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="1. Introdução"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Esta Política de Privacidade descreve como{" "}
-                <b>EducaVale Ltda.</b> (“nós”, “nosso”) trata dados pessoais em
-                seus websites, aplicativos e serviços. Nosso compromisso é atuar
-                em conformidade com a <b>LGPD</b>, garantindo transparência,
+                <b className="text-white">EducaVale Ltda.</b> (“nós”, “nosso”)
+                trata dados pessoais em seus websites, aplicativos e serviços.
+                Nosso compromisso é atuar em conformidade com a{" "}
+                <b className="text-white">LGPD</b>, garantindo transparência,
                 segurança e respeito aos direitos dos titulares.
               </p>
             </Section>
 
             <Section
               id="dados-coletados"
-              icon={<Database className="h-5 w-5 text-emerald-600" />}
+              icon={<Database className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="2. Dados que coletamos"
             >
               <List
                 items={[
                   <>
-                    <b>Dados de contato:</b> nome completo, telefone/WhatsApp,
-                    e-mail.
+                    <b className="text-white">Dados de contato:</b> nome
+                    completo, telefone/WhatsApp, e-mail.
                   </>,
                   <>
-                    <b>Dados de navegação:</b> IP, identificadores de
-                    dispositivo, páginas visitadas, data/horário e origem de
-                    tráfego.
+                    <b className="text-white">Dados de navegação:</b> IP,
+                    identificadores de dispositivo, páginas visitadas,
+                    data/horário e origem de tráfego.
                   </>,
                   <>
-                    <b>Dados de interesse:</b> área/curso de interesse,
-                    interações com formulários.
+                    <b className="text-white">Dados de interesse:</b> área/curso
+                    de interesse, interações com formulários.
                   </>,
                   <>
-                    <b>Dados de contrato/atendimento:</b> histórico de suporte,
-                    informações de matrícula ou contratação (quando aplicável).
+                    <b className="text-white">Dados de contrato/atendimento:</b>{" "}
+                    histórico de suporte, informações de matrícula ou
+                    contratação (quando aplicável).
                   </>,
                 ]}
               />
-              <p className="mt-3 text-sm text-slate-500">
+              <p className="mt-3 text-sm text-gray-400">
+                {" "}
+                {/* Texto ajustado */}
                 Observação: não solicitamos dados sensíveis desnecessários. Caso
                 sejam indispensáveis, trataremos com base legal apropriada e
                 medidas de segurança reforçadas.
@@ -151,13 +180,13 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="finalidades"
-              icon={<ShieldCheck className="h-5 w-5 text-emerald-600" />}
+              icon={<ShieldCheck className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="3. Finalidades e bases legais"
             >
               <List
                 items={[
                   <>
-                    <b>
+                    <b className="text-white">
                       Atender solicitações e contatos (Execução de
                       contrato/Procedimentos preliminares):
                     </b>{" "}
@@ -165,7 +194,7 @@ export default function PoliticaDePrivacidade() {
                     propostas.
                   </>,
                   <>
-                    <b>
+                    <b className="text-white">
                       Marketing e comunicação (Consentimento ou Legítimo
                       Interesse):
                     </b>{" "}
@@ -173,11 +202,15 @@ export default function PoliticaDePrivacidade() {
                     pode se descadastrar a qualquer momento.
                   </>,
                   <>
-                    <b>Melhoria de serviços (Legítimo Interesse):</b> análise de
-                    uso para aprimorar funcionalidades e experiência.
+                    <b className="text-white">
+                      Melhoria de serviços (Legítimo Interesse):
+                    </b>{" "}
+                    análise de uso para aprimorar funcionalidades e experiência.
                   </>,
                   <>
-                    <b>Cumprimento de obrigações legais/regulatórias:</b>{" "}
+                    <b className="text-white">
+                      Cumprimento de obrigações legais/regulatórias:
+                    </b>{" "}
                     armazenamento de registros, prevenção a fraudes e segurança.
                   </>,
                 ]}
@@ -186,25 +219,33 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="compartilhamento"
-              icon={<Globe2 className="h-5 w-5 text-emerald-600" />}
+              icon={<Globe2 className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="4. Compartilhamento de dados"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Podemos compartilhar dados com (I){" "}
-                <b>parceiros e instituições de ensino</b> para viabilizar seu
-                interesse/matrícula; (II) <b>provedores de tecnologia</b>{" "}
+                <b className="text-white">
+                  parceiros e instituições de ensino
+                </b>{" "}
+                para viabilizar seu interesse/matrícula; (II){" "}
+                <b className="text-white">provedores de tecnologia</b>{" "}
                 (hospedagem, analytics, envio de e-mails/WhatsApp); (III){" "}
-                <b>autoridades</b> quando exigido por lei. Exigimos de terceiros
-                medidas adequadas de segurança e conformidade.
+                <b className="text-white">autoridades</b> quando exigido por
+                lei. Exigimos de terceiros medidas adequadas de segurança e
+                conformidade.
               </p>
             </Section>
 
             <Section
               id="cookies"
-              icon={<CookieIcon />}
+              icon={<Cookie className="h-5 w-5 text-emerald-400" />} // Usando Lucide Cookie diretamente, cor ajustada
               title="5. Cookies e tecnologias similares"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Utilizamos cookies para lembrar preferências, entender como você
                 usa nossos serviços e personalizar conteúdos. Você pode
                 gerenciar cookies pelo seu navegador; porém, isso pode impactar
@@ -214,10 +255,12 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="seguranca"
-              icon={<Lock className="h-5 w-5 text-emerald-600" />}
+              icon={<Lock className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="6. Segurança da informação"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Adotamos medidas técnicas e organizacionais para proteger os
                 dados contra acessos não autorizados, perda, alteração ou
                 destruição. Embora empreguemos boas práticas do mercado, nenhum
@@ -228,20 +271,23 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="retencao"
-              icon={<FileText className="h-5 w-5 text-emerald-600" />}
+              icon={<FileText className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="7. Retenção e descarte"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Mantemos seus dados pelo tempo necessário para cumprir as
                 finalidades informadas e as exigências legais. Após esse
-                período, realizamos o <b>descarte seguro</b> ou anonimização,
+                período, realizamos o{" "}
+                <b className="text-white">descarte seguro</b> ou anonimização,
                 conforme aplicável.
               </p>
             </Section>
 
             <Section
               id="direitos"
-              icon={<ShieldCheck className="h-5 w-5 text-emerald-600" />}
+              icon={<ShieldCheck className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="8. Direitos do titular"
             >
               <List
@@ -265,7 +311,9 @@ export default function PoliticaDePrivacidade() {
                   <>Reclamação à ANPD e órgãos de defesa do consumidor.</>,
                 ]}
               />
-              <p className="mt-3 text-sm text-slate-600">
+              <p className="mt-3 text-sm text-gray-400">
+                {" "}
+                {/* Texto ajustado */}
                 Para exercer seus direitos, consulte a seção “Encarregado (DPO)
                 e contato”.
               </p>
@@ -273,10 +321,12 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="transferencias"
-              icon={<Globe2 className="h-5 w-5 text-emerald-600" />}
+              icon={<Globe2 className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="9. Transferências internacionais"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Caso haja transferência internacional de dados, adotaremos
                 salvaguardas adequadas, como cláusulas contratuais padrão e
                 avaliação de nível de proteção, conforme diretrizes da LGPD e da
@@ -286,10 +336,12 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="criancas"
-              icon={<ShieldCheck className="h-5 w-5 text-emerald-600" />}
+              icon={<ShieldCheck className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="10. Dados de crianças e adolescentes"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Nossos serviços não são direcionados a crianças. Caso o
                 tratamento seja necessário, observaremos o melhor interesse da
                 criança/adolescente e as bases legais aplicáveis, incluindo
@@ -300,10 +352,12 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="atualizacoes"
-              icon={<FileText className="h-5 w-5 text-emerald-600" />}
+              icon={<FileText className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="11. Atualizações desta política"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Esta política pode ser atualizada para refletir mudanças legais,
                 tecnológicas ou operacionais. Publicaremos a nova versão com a
                 data de atualização no topo desta página.
@@ -312,36 +366,51 @@ export default function PoliticaDePrivacidade() {
 
             <Section
               id="contato"
-              icon={<Mail className="h-5 w-5 text-emerald-600" />}
+              icon={<Mail className="h-5 w-5 text-emerald-400" />} // Cor do ícone ajustada
               title="12. Encarregado (DPO) e contato"
             >
-              <p>
+              <p className="text-gray-300">
+                {" "}
+                {/* Texto ajustado */}
                 Se tiver dúvidas, solicitações ou quiser exercer seus direitos,
                 entre em contato com nosso Encarregado de Proteção de Dados
                 (DPO):
               </p>
-              <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                <p className="text-slate-800">
-                  <b>Encarregado (DPO):</b> Suporte EducaVale
+              <div className="mt-4 rounded-xl border border-neutral-700 bg-neutral-900 p-4 shadow-sm">
+                {" "}
+                {/* Card de contato adaptado */}
+                <p className="text-white">
+                  {" "}
+                  {/* Texto adaptado */}
+                  <b className="font-semibold">Encarregado (DPO):</b> Suporte
+                  EducaVale
                 </p>
-                <p className="text-slate-800">
-                  <b>E-mail:</b>{" "}
+                <p className="text-white">
+                  {" "}
+                  {/* Texto adaptado */}
+                  <b className="font-semibold">E-mail:</b>{" "}
                   <a
-                    className="text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:decoration-emerald-600"
+                    className="text-emerald-500 underline decoration-emerald-300 underline-offset-4 hover:decoration-emerald-400" // Link adaptado
                     href="mailto:privacidade@seudominio.com"
                   >
                     1educavale@gmail.com
                   </a>
                 </p>
-                <p className="text-slate-800">
-                  <b>Endereço:</b> R. Rio Doce, 50 - Professores, Cel.
-                  Fabriciano - MG, 35170-112
+                <p className="text-white">
+                  {" "}
+                  {/* Texto adaptado */}
+                  <b className="font-semibold">Endereço:</b> R. Rio Doce, 50 -
+                  Professores, Cel. Fabriciano - MG, 35170-112
                 </p>
-                <p className="text-slate-800">
-                  <b>CNPJ:</b> 37.911.890/0001-01
+                <p className="text-white">
+                  {" "}
+                  {/* Texto adaptado */}
+                  <b className="font-semibold">CNPJ:</b> 37.911.890/0001-01
                 </p>
               </div>
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs text-gray-500">
+                {" "}
+                {/* Texto adaptado */}
                 Ao utilizar nossos serviços, você declara ter lido e concordado
                 com esta Política de Privacidade.
               </p>
@@ -353,6 +422,7 @@ export default function PoliticaDePrivacidade() {
   );
 }
 
+// Componente Section reutilizável adaptado
 function Section({
   id,
   title,
@@ -367,38 +437,31 @@ function Section({
   return (
     <section
       id={id}
-      className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+      className="scroll-mt-24 rounded-2xl border border-neutral-700 bg-neutral-800 p-6 shadow-sm" // Fundo e borda adaptados
     >
       <div className="mb-3 flex items-center gap-2">
         {icon}
-        <h2 className="text-xl font-bold text-slate-900">{title}</h2>
+        <h2 className="text-xl font-bold text-white">{title}</h2>{" "}
+        {/* Título adaptado */}
       </div>
-      <div className="prose max-w-none prose-slate prose-p:leading-relaxed prose-li:marker:text-slate-400">
+      <div className="prose max-w-none prose-p:leading-relaxed prose-li:marker:text-gray-500 text-gray-300">
+        {" "}
+        {/* Conteúdo do prose adaptado */}
         {children}
       </div>
     </section>
   );
 }
 
+// Componente List reutilizável adaptado
 function List({ items }: { items: React.ReactNode[] }) {
   return (
-    <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-700">
+    <ul className="mt-2 list-disc space-y-1 pl-5 text-gray-300">
+      {" "}
+      {/* Texto da lista adaptado */}
       {items.map((item, i) => (
         <li key={i}>{item}</li>
       ))}
     </ul>
-  );
-}
-
-function CookieIcon() {
-  return (
-    <svg
-      className="h-5 w-5 text-emerald-600"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M12 2a10 10 0 1 0 10 10c0-.34-.02-.67-.05-1.01a3 3 0 0 1-3.94-2.88 3 3 0 0 1-3.15-3.15A3 3 0 0 1 12 2Zm-2.5 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM9 15a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 1a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 17 16Zm-3-6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-    </svg>
   );
 }

@@ -79,13 +79,16 @@ const courseAreas = [
 ];
 
 const PlansTabContent = ({ onButtonClick }: { onButtonClick: () => void }) => (
-  <Card className="shadow-2xl border-gray-100 rounded-2xl">
+  <Card className="shadow-2xl border border-neutral-800 rounded-2xl bg-neutral-900">
+    {" "}
     <CardContent className="p-8 space-y-6">
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-slate-900">
+        <h3 className="text-2xl font-bold text-white">
+          {" "}
           Escolha o plano ideal para você
         </h3>
-        <p className="text-slate-500">
+        <p className="text-gray-400">
+          {" "}
           Quanto mais você estuda, menos você paga.
         </p>
       </div>
@@ -94,24 +97,30 @@ const PlansTabContent = ({ onButtonClick }: { onButtonClick: () => void }) => (
           <Card
             key={i}
             className={cn(
-              "relative transition-all",
-              plan.highlight && "border-2 border-green-500 shadow-lg"
+              "relative transition-all bg-neutral-800 border border-neutral-700", // Fundo e borda para cartões internos
+              plan.highlight && "border-2 border-emerald-600 shadow-lg"
             )}
           >
             {" "}
             <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               {plan.highlight && (
-                <Badge className="absolute -top-3 left-4 bg-green-600">
+                <Badge className="absolute -top-3 left-4 bg-emerald-700 text-white">
+                  {" "}
+                  {/* Texto branco para badge */}
                   <Star className="mr-1.5 h-3 w-3" />
                   {plan.badge}
                 </Badge>
               )}
               <div className="text-left">
-                <p className="font-bold text-slate-800">{plan.title}</p>
-                <p className="text-xs text-slate-500">{plan.description}</p>
+                <p className="font-bold text-white">{plan.title}</p>{" "}
+                {/* Alterado para branco */}
+                <p className="text-xs text-gray-400">{plan.description}</p>{" "}
+                {/* Alterado para cinza mais claro */}
               </div>
               <div className="text-right">
-                <p className="text-slate-800">
+                <p className="text-white">
+                  {" "}
+                  {/* Alterado para branco */}
                   <span className="text-sm">12x R$</span>
                   <span className="text-4xl font-bold">
                     {plan.price.split(",")[0]}
@@ -127,7 +136,7 @@ const PlansTabContent = ({ onButtonClick }: { onButtonClick: () => void }) => (
       </div>
       <Button
         onClick={onButtonClick}
-        className="w-full h-14 rounded-xl bg-green-600 text-white text-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/30 hover:shadow-xl hover:shadow-green-500/40"
+        className="w-full h-14 rounded-xl bg-emerald-700 text-white text-lg font-bold hover:bg-emerald-800 transition-all shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40"
       >
         Garantir Minha Vaga <ArrowRight className="ml-2" />
       </Button>
@@ -163,22 +172,28 @@ const InfoTabContent = () => {
   };
 
   return (
-    <Card className="shadow-2xl border border-gray-100 rounded-2xl min-h-[550px] flex flex-col justify-center">
+    <Card className="shadow-2xl border border-neutral-800 rounded-2xl bg-neutral-900 min-h-[550px] flex flex-col justify-center">
+      {" "}
+      {/* Fundo e borda ajustados para tema escuro */}
       <CardContent className="p-8">
         {status === "success" ? (
           <div className="flex flex-col items-center justify-center text-center h-full py-10">
-            <CheckCircle className="h-16 w-16 text-green-500" />
-            <h3 className="mt-4 text-2xl font-bold text-slate-900">
+            <CheckCircle className="h-16 w-16 text-emerald-600" />
+            <h3 className="mt-4 text-2xl font-bold text-white">
+              {" "}
+              {/* Alterado para branco */}
               Inscrição Enviada!
             </h3>
-            <p className="mt-2 text-slate-600">
+            <p className="mt-2 text-gray-300">
+              {" "}
+              {/* Alterado para cinza mais claro */}
               Seus dados foram recebidos. Em breve, um de nossos consultores
               entrará em contato.
             </p>
             <Button
               variant="link"
               onClick={() => setStatus("idle")}
-              className="mt-4 text-green-600"
+              className="mt-4 text-emerald-600 hover:text-emerald-500" // Ajustado para hover em tema escuro
             >
               Enviar novamente
             </Button>
@@ -186,10 +201,12 @@ const InfoTabContent = () => {
         ) : (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-slate-900">
+              <h3 className="text-2xl font-bold text-white">
+                {" "}
                 Prefere falar com um consultor?
               </h3>
-              <p className="text-slate-500">
+              <p className="text-gray-400">
+                {" "}
                 Preencha os dados e entraremos em contato.
               </p>
             </div>
@@ -197,26 +214,31 @@ const InfoTabContent = () => {
               <Input
                 name="fullName"
                 placeholder="Seu nome completo"
-                className="h-12 rounded-lg"
+                className="h-12 rounded-lg bg-neutral-800 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600" // Ajustado para tema escuro
                 required
               />
-
-              {/* ✅ CAMPO DE E-MAIL REMOVIDO */}
 
               <Input
                 name="whatsapp"
                 placeholder="WhatsApp (com DDD)"
-                className="h-12 rounded-lg"
+                className="h-12 rounded-lg bg-neutral-800 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600" // Ajustado para tema escuro
                 required
               />
 
               <Select name="interestArea" required>
-                <SelectTrigger className="h-12 rounded-lg">
+                <SelectTrigger className="h-12 rounded-lg bg-neutral-800 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600">
+                  {" "}
+                  {/* Ajustado para tema escuro */}
                   <SelectValue placeholder="Escolha sua área de interesse" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-neutral-800 border-neutral-700 text-gray-200">
+                  {" "}
                   {courseAreas.map((area) => (
-                    <SelectItem key={area} value={area}>
+                    <SelectItem
+                      key={area}
+                      value={area}
+                      className="hover:bg-neutral-700 focus:bg-neutral-700 data-[state=checked]:bg-emerald-900 data-[state=checked]:text-white" // Item do Select ajustado
+                    >
                       {area}
                     </SelectItem>
                   ))}
@@ -226,7 +248,7 @@ const InfoTabContent = () => {
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full h-12 rounded-lg bg-green-600 text-white text-base font-semibold hover:bg-green-700"
+                className="w-full h-12 rounded-lg bg-emerald-700 text-white text-base font-semibold hover:bg-emerald-800"
               >
                 {status === "loading" ? (
                   <>
@@ -243,12 +265,16 @@ const InfoTabContent = () => {
                 </p>
               )}
             </form>
-            <div className="flex items-center justify-center gap-6 text-xs text-gray-500 pt-2">
+            <div className="flex items-center justify-center gap-6 text-xs text-gray-400 pt-2">
+              {" "}
+              {/* Alterado para cinza mais claro */}
               <span className="flex items-center gap-1.5">
-                <Rocket size={14} /> Início imediato
+                <Rocket size={14} className="text-emerald-500" /> Início
+                imediato {/* Ícone verde */}
               </span>
               <span className="flex items-center gap-1.5">
-                <ScrollText size={14} /> Certificado MEC
+                <ScrollText size={14} className="text-emerald-500" />{" "}
+                Certificado MEC {/* Ícone verde */}
               </span>
             </div>
           </div>
@@ -262,7 +288,9 @@ export default function HeroPremium() {
   const [activeTab, setActiveTab] = useState("plans");
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-neutral-900">
+      {" "}
+      {/* Fundo cinza escuro aplicado aqui */}
       <div className="container mx-auto px-6 py-24 sm:py-32 grid lg:grid-cols-2 gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -272,16 +300,20 @@ export default function HeroPremium() {
         >
           <Badge
             variant="outline"
-            className="border-green-300 bg-green-100 text-green-800 font-semibold py-1 px-3"
+            className="border-emerald-700 bg-emerald-900 text-emerald-200 font-semibold py-1 px-3" // Badge ajustado para tema escuro
           >
             <Rocket className="mr-2 h-4 w-4" />
             Oferta Especial - Últimas Vagas
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-white">
+            {" "}
+            {/* Alterado para branco */}
             Transforme sua <br />
-            <span className="text-green-600">Carreira Hoje</span>
+            <span className="text-emerald-700">Carreira Hoje</span>
           </h1>
-          <p className="text-lg text-slate-600 max-w-xl">
+          <p className="text-lg text-gray-300 max-w-xl">
+            {" "}
+            {/* Alterado para cinza mais claro */}
             Pós-graduação e MBA reconhecidos pelo MEC. Metodologia inovadora,
             professores especialistas e certificação valorizada pelo mercado.
           </p>
@@ -293,24 +325,32 @@ export default function HeroPremium() {
               "Suporte personalizado",
               "Início imediato",
             ].map((item, i) => (
-              <li key={i} className="flex items-center gap-3 text-slate-700">
-                <CheckCircle2 className="w-5 h-5 text-green-600" />
+              <li key={i} className="flex items-center gap-3 text-gray-200">
+                {" "}
+                {/* Alterado para cinza mais claro */}
+                <CheckCircle2 className="w-5 h-5 text-emerald-700" />
                 <span className="text-base font-medium">{item}</span>
               </li>
             ))}
           </ul>
           <div className="flex gap-12 pt-8">
             <div>
-              <p className="text-4xl font-bold text-slate-900">50+</p>
-              <p className="text-sm text-slate-500">Cursos</p>
+              <p className="text-4xl font-bold text-white">50+</p>{" "}
+              {/* Alterado para branco */}
+              <p className="text-sm text-gray-400">Cursos</p>{" "}
+              {/* Alterado para cinza mais claro */}
             </div>
             <div>
-              <p className="text-4xl font-bold text-slate-900">15k+</p>
-              <p className="text-sm text-slate-500">Alunos</p>
+              <p className="text-4xl font-bold text-white">15k+</p>{" "}
+              {/* Alterado para branco */}
+              <p className="text-sm text-gray-400">Alunos</p>{" "}
+              {/* Alterado para cinza mais claro */}
             </div>
             <div>
-              <p className="text-4xl font-bold text-slate-900">98%</p>
-              <p className="text-sm text-slate-500">Satisfação</p>
+              <p className="text-4xl font-bold text-white">98%</p>{" "}
+              {/* Alterado para branco */}
+              <p className="text-sm text-gray-400">Satisfação</p>{" "}
+              {/* Alterado para cinza mais claro */}
             </div>
           </div>
         </motion.div>
@@ -324,9 +364,21 @@ export default function HeroPremium() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="plans">Nossos Planos</TabsTrigger>
-              <TabsTrigger value="info">Receba Informações</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-neutral-800 border-b border-neutral-700 text-gray-400">
+              {" "}
+              {/* TabsList ajustada para tema escuro */}
+              <TabsTrigger
+                value="plans"
+                className="data-[state=active]:bg-neutral-900 data-[state=active]:text-white data-[state=active]:shadow-none" // Active tab ajustada
+              >
+                Nossos Planos
+              </TabsTrigger>
+              <TabsTrigger
+                value="info"
+                className="data-[state=active]:bg-neutral-900 data-[state=active]:text-white data-[state=active]:shadow-none" // Active tab ajustada
+              >
+                Receba Informações
+              </TabsTrigger>
             </TabsList>
           </Tabs>
           <div className="mt-4">

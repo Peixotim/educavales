@@ -1,26 +1,20 @@
-// src/components/lib/api.ts
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 export type SubscriptionData = {
   name: string;
-  phone: string;
+  phone: string;           // já normalizado (só dígitos, com 55 se quiser)
   areaOfInterest: string;
   enterpriseId: number;
 };
 
-/* =========================
-   Tipos de resposta da API
-========================= */
+/* Tipos possíveis de resposta */
 type LoginResponse = {
   status?: string;
   statusCode?: number;
   message?: string;
   error?: string;
-  // A API pode retornar isso:
-  // { authToken: { token: "..." } }
-  authToken?: { token: string };
-  // ou, em alguns ambientes, apenas { token: "..." }
-  token?: string;
+  authToken?: { token: string }; // sua API normalmente manda isso
+  token?: string;                // fallback
 };
 
 type LeadResponse = {
@@ -29,9 +23,7 @@ type LeadResponse = {
   [key: string]: unknown;
 };
 
-/* =========================
-   Utils
-========================= */
+/* ===== Utils token ===== */
 const TOKEN_KEY = "apiToken";
 const EXP_KEY = "apiTokenExpiryMs";
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -72,8 +64,6 @@ function clearToken(): void {
   }
 }
 
-
-
 async function safeJson<T>(res: Response): Promise<T | null> {
   try {
     return (await res.json()) as T;
@@ -82,9 +72,7 @@ async function safeJson<T>(res: Response): Promise<T | null> {
   }
 }
 
-/* =========================
-   Login (gera e cacheia 30d)
-========================= */
+/* ===== Login ===== */
 async function loginAndCache(): Promise<string> {
   const email = process.env.NEXT_PUBLIC_CLIENT_ID;
   const password = process.env.NEXT_PUBLIC_CLIENT_SECRET;
@@ -102,8 +90,6 @@ async function loginAndCache(): Promise<string> {
   });
 
   const data = (await safeJson<LoginResponse>(res)) ?? {};
-
-  // sua API: { authToken: { token: "..." } }
   const token = data.authToken?.token ?? data.token;
 
   if (!res.ok || !token) {
@@ -114,12 +100,9 @@ async function loginAndCache(): Promise<string> {
   return token;
 }
 
-/* evita múltiplos logins concorrentes */
 let inFlightLogin: Promise<string> | null = null;
 
-/* =========================
-   Pega token válido (auto-renova)
-========================= */
+/* ===== Token válido (auto-renova) ===== */
 export async function getToken(): Promise<string> {
   const { token, expiry } = readToken();
   const now = Date.now();
@@ -135,13 +118,10 @@ export async function getToken(): Promise<string> {
   return token;
 }
 
-/* =========================
-   Envia lead (com retry de auth)
-========================= */
+/* ===== Enviar lead ===== */
 export async function submitSubscription(
   subscriptionData: SubscriptionData
 ): Promise<LeadResponse> {
-  // 1) tenta com token atual/renovado
   let token = await getToken();
 
   let res = await fetch(`${API_BASE_URL}/leads/criar`, {
@@ -154,7 +134,6 @@ export async function submitSubscription(
     body: JSON.stringify(subscriptionData),
   });
 
-  // 2) se auth falhar, limpa cache, reloga e tenta 1x de novo
   if (res.status === 401 || res.status === 403) {
     clearToken();
     token = await getToken();
@@ -170,19 +149,15 @@ export async function submitSubscription(
   }
 
   const data = (await safeJson<LeadResponse>(res)) ?? {};
-
   if (!res.ok) {
     throw new Error(
       data.message || data.error || `Falha ao criar lead (status ${res.status}).`
     );
   }
-
   return data;
 }
 
-/* =========================
-   Helpers (telefone / form)
-========================= */
+/* ===== Helpers ===== */
 function onlyDigits(v: string): string {
   return (v || "").replace(/\D/g, "");
 }
@@ -190,6 +165,7 @@ function onlyDigits(v: string): string {
 export function normalizePhone(raw: string): string {
   const d = onlyDigits(raw);
   if (!d) return "";
+  // opcional: prefixar 55
   return d.startsWith("55") ? d : `55${d}`;
 }
 

@@ -18,25 +18,25 @@ import { motion } from "framer-motion";
 export default function Contact() {
   const contactDetails = [
     {
-      icon: <Phone className="h-6 w-6 text-green-600" />,
+      icon: <Phone className="h-6 w-6 text-emerald-300" />, // Alterado de text-green-600 para text-emerald-300
       label: "Telefone Suporte",
       value: "(31) 9139-8980",
       href: "tel:+5591398980",
     },
     {
-      icon: <Mail className="h-6 w-6 text-green-600" />,
+      icon: <Mail className="h-6 w-6 text-emerald-300" />, // Alterado de text-green-600 para text-emerald-300
       label: "E-mail para Contato",
       value: "1educavale@gmail.com",
       href: "mailto:1educavale@gmail.com",
     },
     {
-      icon: <Instagram className="h-6 w-6 text-green-600" />,
+      icon: <Instagram className="h-6 w-6 text-emerald-300" />, // Alterado de text-green-600 para text-emerald-300
       label: "Nosso Instagram",
       value: "@educavale.oficial",
       href: "https://www.instagram.com/educavale.oficial",
     },
     {
-      icon: <MapPin className="h-6 w-6 text-green-600" />,
+      icon: <MapPin className="h-6 w-6 text-emerald-300" />, // Alterado de text-green-600 para text-emerald-300
       label: "Nosso Endereço",
       value: "R. Rio Doce, 50 - Professores, Cel. Fabriciano - MG, 35170-112",
     },
@@ -56,7 +56,9 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-16 sm:py-24 bg-neutral-900">
+      {" "}
+      {/* Fundo escuro na seção */}
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <motion.div
@@ -66,27 +68,37 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <span className="text-green-600 font-semibold">Fale Conosco</span>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mt-2">
+              <span className="text-emerald-500 font-semibold">
+                Fale Conosco
+              </span>{" "}
+              {/* Alterado de text-green-600 para text-emerald-500 */}
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-white mt-2">
+                {" "}
+                {/* Alterado de text-slate-900 para text-white */}
                 Estamos aqui para ajudar.
               </h2>
-              <p className="mt-4 text-lg text-slate-600 leading-relaxed">
+              <p className="mt-4 text-lg text-gray-300 leading-relaxed">
+                {" "}
+                {/* Alterado de text-slate-600 para text-gray-300 */}
                 Tem alguma dúvida sobre nossos cursos, matrículas ou parcerias?
                 Escolha um dos canais abaixo ou nos envie uma mensagem
                 diretamente pelo formulário.
               </p>
             </div>
-
-            <Separator />
-
+            <Separator className="bg-neutral-700" />{" "}
+            {/* Separator ajustado para tema escuro */}
             <div className="space-y-6">
               {contactDetails.map((item, i) => (
                 <div key={i} className="flex items-start gap-5">
-                  <div className="flex-shrink-0 bg-green-100 text-green-700 rounded-lg p-3">
+                  <div className="flex-shrink-0 bg-emerald-900 text-emerald-300 rounded-lg p-3">
+                    {" "}
+                    {/* Fundo e texto do ícone ajustados */}
                     {item.icon}
                   </div>
                   <div>
-                    <p className="text-lg font-semibold text-slate-800">
+                    <p className="text-lg font-semibold text-white">
+                      {" "}
+                      {/* Alterado de text-slate-800 para text-white */}
                       {item.label}
                     </p>
                     {item.href ? (
@@ -94,12 +106,12 @@ export default function Contact() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-600 hover:text-green-600 transition-colors"
+                        className="text-gray-300 hover:text-emerald-500 transition-colors" // Alterado de text-slate-600 hover:text-green-600
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <p className="text-slate-600">{item.value}</p>
+                      <p className="text-gray-300">{item.value}</p> // Alterado de text-slate-600 para text-gray-300
                     )}
                   </div>
                 </div>
@@ -112,12 +124,18 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
           >
-            <Card className="shadow-2xl rounded-2xl border-slate-200">
+            <Card className="shadow-2xl rounded-2xl border-neutral-700 bg-neutral-800">
+              {" "}
+              {/* Card ajustado para tema escuro */}
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-slate-900">
+                <CardTitle className="text-2xl font-bold text-white">
+                  {" "}
+                  {/* Alterado de text-slate-900 para text-white */}
                   Envie uma Mensagem
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-300">
+                  {" "}
+                  {/* Descrição ajustada para tema escuro */}
                   Nossa equipe responderá o mais breve possível.
                 </CardDescription>
               </CardHeader>
@@ -126,7 +144,7 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
-                      className="text-sm font-medium text-slate-700"
+                      className="text-sm font-medium text-gray-200" // Alterado de text-slate-700 para text-gray-200
                     >
                       Seu Nome
                     </label>
@@ -136,12 +154,13 @@ export default function Contact() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
+                      className="bg-neutral-900 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600" // Input ajustado para tema escuro
                     />
                   </div>
                   <div className="space-y-2">
                     <label
                       htmlFor="email"
-                      className="text-sm font-medium text-slate-700"
+                      className="text-sm font-medium text-gray-200" // Alterado de text-slate-700 para text-gray-200
                     >
                       Seu E-mail
                     </label>
@@ -152,19 +171,20 @@ export default function Contact() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      className="bg-neutral-900 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600" // Input ajustado para tema escuro
                     />
                   </div>
                   <div className="space-y-2">
                     <label
                       htmlFor="message"
-                      className="text-sm font-medium text-slate-700"
+                      className="text-sm font-medium text-gray-200" // Alterado de text-slate-700 para text-gray-200
                     >
                       Sua Mensagem
                     </label>
                     <Textarea
                       id="message"
                       placeholder="Escreva sua dúvida ou mensagem aqui..."
-                      className="min-h-[120px]"
+                      className="min-h-[120px] bg-neutral-900 text-gray-200 placeholder:text-gray-500 border-neutral-700 focus-visible:ring-emerald-600" // Textarea ajustado para tema escuro
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       required
@@ -173,7 +193,7 @@ export default function Contact() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-green-600 hover:bg-green-700 text-base font-bold"
+                    className="w-full bg-emerald-700 hover:bg-emerald-800 text-base font-bold text-white" // Botão ajustado para tema escuro
                   >
                     <Send className="mr-2 h-5 w-5" />
                     Enviar Mensagem

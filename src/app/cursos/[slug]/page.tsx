@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react"; // Adicionado useCallback
 import { useParams, notFound, useRouter } from "next/navigation";
 import { slugify } from "@/utils/slugify";
 import { motion } from "framer-motion";
@@ -79,7 +79,7 @@ export default function PaginaDeDetalhesDoCurso() {
     setFormStatus("form");
     setIsModalOpen(true);
   };
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = useCallback(() => setIsModalOpen(false), []); // Usando useCallback
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -94,7 +94,7 @@ export default function PaginaDeDetalhesDoCurso() {
         enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID) || 1, //Mudar o id da empresa
       };
 
-      console.log("🚀 Enviando para a API:", data);
+      console.log("�� Enviando para a API:", data);
       await submitSubscription(data);
 
       const message = `Olá! Tenho interesse na área de ${areaInfo?.title}. Meu nome é ${data.name}.`;
@@ -109,12 +109,13 @@ export default function PaginaDeDetalhesDoCurso() {
     }
   };
 
-  const handleWhatsAppRedirect = () => {
+  const handleWhatsAppRedirect = useCallback(() => {
+    // Usando useCallback
     const encodedMessage = encodeURIComponent(whatsappMessage);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
     closeModal();
-  };
+  }, [whatsappMessage, closeModal]);
 
   if (!areaInfo) {
     notFound();
@@ -141,13 +142,15 @@ export default function PaginaDeDetalhesDoCurso() {
 
   return (
     <>
-      <div className="bg-slate-50">
+      <div className="bg-neutral-900">
+        {" "}
+        {/* Fundo principal da página escuro */}
         <div className="container mx-auto px-4 py-12 sm:py-16">
           <div className="mb-8">
             <Button
               variant="ghost"
               onClick={() => router.back()}
-              className="text-slate-600 hover:text-slate-900"
+              className="text-gray-300 hover:text-white border border-neutral-700 bg-neutral-800 hover:bg-neutral-700" // Botão voltar adaptado
             >
               <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
             </Button>
@@ -161,75 +164,104 @@ export default function PaginaDeDetalhesDoCurso() {
             >
               <Badge
                 variant="outline"
-                className="border-green-300 bg-green-100 text-green-800 font-semibold"
+                className="border-emerald-700 bg-emerald-900 text-emerald-200 font-semibold" // Badge de área de especialização adaptado
               >
                 Área de Especialização
               </Badge>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-4 tracking-tight">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-white mt-4 tracking-tight">
+                {" "}
+                {/* Título adaptado */}
                 {areaInfo.title}
               </h1>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 {keyInfoCards.map((info, i) => (
                   <Card
                     key={i}
-                    className="bg-white border-slate-200 text-center"
+                    className="bg-neutral-800 border-neutral-700 text-center" // Card de info chave adaptado
                   >
                     <CardContent className="p-4">
-                      <div className="mx-auto h-10 w-10 mb-2 flex items-center justify-center text-green-600">
+                      <div className="mx-auto h-10 w-10 mb-2 flex items-center justify-center text-emerald-500">
+                        {" "}
+                        {/* Ícone adaptado */}
                         {info.icon}
                       </div>
-                      <p className="text-sm font-bold text-slate-800">
+                      <p className="text-sm font-bold text-white">
+                        {" "}
+                        {/* Texto adaptado */}
                         {info.label}
                       </p>
-                      <p className="text-xs text-slate-500">{info.value}</p>
+                      <p className="text-xs text-gray-300">{info.value}</p>{" "}
+                      {/* Texto adaptado */}
                     </CardContent>
                   </Card>
                 ))}
               </div>
-              <Separator className="my-10" />
+              <Separator className="my-10 bg-neutral-700" />{" "}
+              {/* Separador adaptado */}
               <div className="space-y-12">
                 <div id="o-que-voce-vai-aprender">
-                  <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
-                    <Award className="text-green-600" />O que você vai aprender
+                  <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                    {" "}
+                    {/* Título adaptado */}
+                    <Award className="text-emerald-500" />{" "}
+                    {/* Ícone adaptado */}O que você vai aprender
                   </h2>
                   <ul className="mt-4 space-y-3">
                     {areaInfo.whatYouWillLearn.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
-                        <span className="text-slate-600">{item}</span>
+                        <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />{" "}
+                        {/* Ícone adaptado */}
+                        <span className="text-gray-300">{item}</span>{" "}
+                        {/* Texto adaptado */}
                       </li>
                     ))}
                   </ul>
                 </div>
                 {areaInfo.sections.map((section, i) => (
                   <div key={i}>
-                    <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                      {" "}
+                      {/* Título adaptado */}
                       {section.title.includes("Objetivos") ? (
-                        <Award className="text-green-600" />
+                        <Award className="text-emerald-500" /> // Ícone adaptado
                       ) : (
-                        <Users className="text-green-600" />
+                        <Users className="text-emerald-500" /> // Ícone adaptado
                       )}
                       {section.title}
                     </h2>
-                    <p className="mt-4 text-slate-600 leading-relaxed">
+                    <p className="mt-4 text-gray-300 leading-relaxed">
+                      {" "}
+                      {/* Parágrafo adaptado */}
                       {section.content}
                     </p>
                   </div>
                 ))}
                 {areaInfo.depoiments && (
-                  <div className="border-t border-slate-200 pt-10">
-                    <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3 mb-4">
+                  <div className="border-t border-neutral-700 pt-10">
+                    {" "}
+                    {/* Borda adaptada */}
+                    <h2 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
+                      {" "}
+                      {/* Título adaptado */}
                       <Star className="text-amber-500" />
                       Depoimento de Aluno
                     </h2>
-                    <Card className="bg-white">
-                      <CardContent className="p-6 italic text-slate-600">
+                    <Card className="bg-neutral-800 border-neutral-700">
+                      {" "}
+                      {/* Card de depoimento adaptado */}
+                      <CardContent className="p-6 italic text-gray-300">
+                        {" "}
+                        {/* Texto adaptado */}
                         <p>{areaInfo.depoiments.texto}</p>
                         <footer className="mt-4 not-italic text-right">
-                          <p className="font-bold text-slate-800">
+                          <p className="font-bold text-white">
+                            {" "}
+                            {/* Texto adaptado */}
                             {areaInfo.depoiments.autor}
                           </p>
-                          <p className="text-sm text-slate-500">
+                          <p className="text-sm text-gray-400">
+                            {" "}
+                            {/* Texto adaptado */}
                             {areaInfo.depoiments.cargo}
                           </p>
                         </footer>
@@ -245,10 +277,16 @@ export default function PaginaDeDetalhesDoCurso() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <Card className="shadow-2xl sticky top-8 border-gray-100 rounded-2xl">
-                <CardHeader className="text-center bg-slate-900 text-white p-6 rounded-t-2xl">
+              <Card className="shadow-2xl sticky top-8 border-neutral-700 rounded-2xl bg-neutral-800">
+                {" "}
+                {/* Card de planos adaptado */}
+                <CardHeader className="text-center bg-neutral-900 text-white p-6 rounded-t-2xl">
+                  {" "}
+                  {/* Cabeçalho do card de planos adaptado */}
                   <h3 className="text-2xl font-bold">Plano Ideal para Você</h3>
-                  <p className="text-slate-300">
+                  <p className="text-gray-300">
+                    {" "}
+                    {/* Texto adaptado */}
                     Quanto mais você estuda, menos você paga.
                   </p>
                 </CardHeader>
@@ -258,27 +296,35 @@ export default function PaginaDeDetalhesDoCurso() {
                       key={i}
                       className={`relative rounded-lg p-4 border transition-all ${
                         plan.highlight
-                          ? "border-2 border-green-500 bg-white"
-                          : "bg-slate-50 border-slate-200"
+                          ? "border-2 border-emerald-500 bg-neutral-800" // Plano destacado adaptado
+                          : "bg-neutral-900 border-neutral-700" // Plano normal adaptado
                       }`}
                     >
                       {plan.highlight && plan.badge && (
-                        <Badge className="absolute -top-3 left-4 bg-green-600">
+                        <Badge className="absolute -top-3 left-4 bg-emerald-700">
+                          {" "}
+                          {/* Badge adaptado */}
                           <Star className="mr-1.5 h-3 w-3" />
                           {plan.badge}
                         </Badge>
                       )}
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                         <div>
-                          <p className="font-bold text-slate-800">
+                          <p className="font-bold text-white">
+                            {" "}
+                            {/* Texto adaptado */}
                             {plan.title}
                           </p>
-                          <p className="text-xs text-slate-500">
+                          <p className="text-xs text-gray-300">
+                            {" "}
+                            {/* Texto adaptado */}
                             {plan.description}
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-slate-800">
+                          <p className="text-white">
+                            {" "}
+                            {/* Texto adaptado */}
                             <span className="text-sm">12x </span>
                             <span className="text-sm">R$</span>
                             <span className="text-4xl font-bold">
@@ -294,7 +340,7 @@ export default function PaginaDeDetalhesDoCurso() {
                   ))}
                   <Button
                     onClick={openModal}
-                    className="w-full h-14 mt-4 rounded-xl bg-green-600 text-white text-lg font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/30 hover:shadow-xl hover:shadow-green-500/40"
+                    className="w-full h-14 mt-4 rounded-xl bg-emerald-700 text-white text-lg font-bold hover:bg-emerald-800 transition-all shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40" // Botão adaptado
                   >
                     Saiba mais <ArrowRight className="ml-2" />
                   </Button>

@@ -53,18 +53,18 @@ export default function Home() {
       </header>
       <main className="mt-2">
         <HeroPremium />
+        <section className=" bg-neutral-900">
+          <SearchSection
+            searchTerm={searchTerm}
+            onSearchChange={(e) => setSearchTerm(e.target.value)}
+            activeFilter={activeFilter}
+            onFilterChange={handleFilterChange}
+          />
+        </section>
 
-        <SearchSection
-          searchTerm={searchTerm}
-          onSearchChange={(e) => setSearchTerm(e.target.value)}
-          activeFilter={activeFilter}
-          onFilterChange={handleFilterChange}
-        />
-        <hr className="max-w-5xl mx-auto border-slate-200" />
-
-        <section id="cursos" className="py-12 lg:py-16">
+        <section id="cursos" className="py-12 lg:py-16 bg-neutral-900">
           <div className="max-w-7xl mx-auto px-4" id="cursos">
-            <h2 className="text-3xl font-bold text-slate-800 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">
               Nossas Especializações
             </h2>
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
@@ -77,7 +77,7 @@ export default function Home() {
               {visibleCount < filteredCards.length && (
                 <button
                   onClick={handleLoadMore}
-                  className="bg-slate-900 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:bg-slate-700 hover:shadow-lg hover:shadow-slate-700/40"
+                  className="bg-emerald-950 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:bg-green-900 hover:shadow-lg hover:shadow-slate-700/40"
                 >
                   Carregar Mais Areas
                 </button>
