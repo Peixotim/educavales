@@ -10,7 +10,8 @@ import {
   Mail,
   Globe2,
   ArrowLeft,
-  Cookie, // Usando o ícone Cookie diretamente do Lucide
+  Cookie,
+  Link, // Usando o ícone Cookie diretamente do Lucide
 } from "lucide-react";
 
 export default function PoliticaDePrivacidade() {
@@ -23,14 +24,14 @@ export default function PoliticaDePrivacidade() {
         {/* <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-100 via-transparent to-transparent" /> */}
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10">
           <div className="mb-8">
-            <a href="/">
+            <Link href="/">
               {" "}
               {/* Usando <a> para navegação */}
               <button className="inline-flex items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-2 text-sm font-medium text-gray-200 shadow-sm hover:bg-neutral-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2">
                 <ArrowLeft className="h-4 w-4" />
                 Voltar
               </button>
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
