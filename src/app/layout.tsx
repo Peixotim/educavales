@@ -3,7 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import CookieConsent from "@/components/CookieConsent";
-
+import Image from "next/image";
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -77,6 +77,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="p8j7IGmPd_8IsEFdVTNRjDD2pJvACQRk_mAqWs6bc1M"
         />
+
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -87,21 +88,22 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1843254712935806');
+            fbq('init', '830251270171431'); // Novo ID do pixel
             fbq('track', 'PageView');
           `}
         </Script>
 
         <noscript>
-          <img
+          <Image
             height="1"
             width="1"
             alt="facebook-script"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1843254712935806&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=830251270171431&ev=PageView&noscript=1"
           />
         </noscript>
       </head>
+
       <body className={montserrat.className}>
         {children}
         <CookieConsent />

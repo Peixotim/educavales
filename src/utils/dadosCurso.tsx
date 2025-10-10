@@ -20,7 +20,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Arte, Moda e Música",
       img: {
-        src: "https://images.pexels.com/photos/102127/pexels-photo-102127.jpeg",
+        src: "",
         alt: "Artista trabalhando em um ateliê com várias telas e tintas",
       },
       keyInfo: {
@@ -57,7 +57,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Ciências Agrárias e Veterinária",
       img: {
-        src: "https://images.pexels.com/photos/6235233/pexels-photo-6235233.jpeg",
+        src: "",
         alt: "Veterinária cuidando de um cachorro em uma clínica moderna",
       },
       keyInfo: {
@@ -93,7 +93,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Ciências Contábeis",
       img: {
-        src: "https://images.pexels.com/photos/7567433/pexels-photo-7567433.jpeg",
+        src: "",
         alt: "Profissional de contabilidade trabalhando com calculadora e planilhas financeiras",
       },
       keyInfo: {
@@ -129,7 +129,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Ciências Religiosas – Conhecimento e Diálogo",
       img: {
-        src: "https://images.pexels.com/photos/1429227/pexels-photo-1429227.jpeg",
+        src: "",
         alt: "Biblioteca antiga com livros de teologia e filosofia",
       },
       keyInfo: {
@@ -165,7 +165,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Ciências Sociais – Analise e Transforme a Sociedade",
       img: {
-        src: "https://images.pexels.com/photos/3184433/pexels-photo-3184433.jpeg",
+        src: "",
         alt: "Grupo diverso de pessoas em uma mesa redonda discutindo projetos sociais",
       },
       keyInfo: {
@@ -201,7 +201,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Coaching – Desenvolva Pessoas e Carreiras",
       img: {
-        src: "https://images.pexels.com/photos/3184419/pexels-photo-3184419.jpeg",
+        src: "",
         alt: "Pessoa mentorando outra em um ambiente de escritório moderno",
       },
       keyInfo: {
@@ -237,7 +237,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Comunicação Social – Conecte e Engaje Pessoas",
       img: {
-        src: "https://images.pexels.com/photos/3194519/pexels-photo-3194519.jpeg",
+        src: "",
         alt: "Equipe de comunicação trabalhando em uma campanha de marketing digital",
       },
       keyInfo: {
@@ -273,7 +273,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Educação Física – Performance, Saúde e Treinamento",
       img: {
-        src: "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg",
+        src: "",
         alt: "Personal trainer auxiliando um aluno em um exercício de musculação",
       },
       keyInfo: {
@@ -311,7 +311,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Educação – Inove em Sala de Aula",
       img: {
-        src: "https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg",
+        src: "",
         alt: "Professora em uma sala de aula moderna, interagindo com alunos",
       },
       keyInfo: {
@@ -347,7 +347,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Gestão Empresarial – Lidere com Estratégia",
       img: {
-        src: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg",
+        src: "",
         alt: "Equipe empresarial celebrando o sucesso de um projeto em uma reunião",
       },
       keyInfo: {
@@ -383,7 +383,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Engenharia e Arquitetura – Projete o Futuro",
       img: {
-        src: "https://images.pexels.com/photos/3139612/pexels-photo-3139612.jpeg",
+        src: "",
         alt: "Arquiteto analisando plantas em um canteiro de obras moderno",
       },
       keyInfo: {
@@ -420,7 +420,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Gestão de Esportes – Paixão que Vira Negócio",
       img: {
-        src: "https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg",
+        src: "",
         alt: "Jogador de basquete fazendo uma enterrada espetacular",
       },
       keyInfo: {
@@ -456,7 +456,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Estética e Cosmetologia – Beleza e Bem-Estar",
       img: {
-        src: "https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg",
+        src: "",
         alt: "Profissional de estética realizando um procedimento facial em uma cliente",
       },
       keyInfo: {
@@ -493,7 +493,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Farmácia – Cuidado Farmacêutico e Gestão",
       img: {
-        src: "https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg",
+        src: "",
         alt: "Farmacêutico em um laboratório, trabalhando com frascos e fórmulas",
       },
       keyInfo: {
@@ -529,7 +529,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Fisioterapia – Reabilitação e Performance",
       img: {
-        src: "https://images.pexels.com/photos/3912944/pexels-photo-3912944.jpeg",
+        src: "",
         alt: "Fisioterapeuta realizando um exercício de reabilitação com um paciente",
       },
       keyInfo: {
@@ -565,7 +565,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Gastronomia – Gestão e Inovação na Cozinha",
       img: {
-        src: "https://images.pexels.com/photos/3217157/pexels-photo-3217157.jpeg",
+        src: "",
         alt: "Chef de cozinha finalizando um prato gourmet com precisão",
       },
       keyInfo: {
@@ -601,7 +601,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Gestão, Economia e Finanças – Visão Estratégica",
       img: {
-        src: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg",
+        src: "",
         alt: "Pessoas em uma reunião de negócios analisando gráficos financeiros",
       },
       keyInfo: {
@@ -637,7 +637,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Área Jurídica – Construa uma Carreira de Destaque",
       img: {
-        src: "https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg",
+        src: "",
         alt: "Martelo de juiz e livros de direito sobre uma mesa de madeira",
       },
       keyInfo: {
@@ -673,7 +673,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Logística e Supply Chain – Eficiência que Gera Lucro",
       img: {
-        src: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg",
+        src: "",
         alt: "Grande centro de distribuição com prateleiras altas e empilhadeiras",
       },
       keyInfo: {
@@ -709,7 +709,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Marketing Digital e Vendas – Estratégias Vencedoras",
       img: {
-        src: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg",
+        src: "",
         alt: "Pessoa analisando gráficos de performance de marketing em um tablet",
       },
       keyInfo: {
@@ -746,7 +746,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "MBA Executivo – Prepare-se para o Topo",
       img: {
-        src: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
+        src: "",
         alt: "Equipe de executivos em uma reunião de planejamento estratégico",
       },
       keyInfo: {
@@ -782,7 +782,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Meio Ambiente – Gestão e Sustentabilidade",
       img: {
-        src: "https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg",
+        src: "",
         alt: "Mãos segurando uma pequena planta com terra, simbolizando sustentabilidade",
       },
       keyInfo: {
@@ -818,7 +818,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Nutrição – Saúde do Prato à Performance",
       img: {
-        src: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+        src: "",
         alt: "Prato colorido com salada, frutas e grãos, representando uma alimentação saudável",
       },
       keyInfo: {
@@ -855,7 +855,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Psicologia – Novas Abordagens e Práticas Clínicas",
       img: {
-        src: "https://images.pexels.com/photos/4101143/pexels-photo-4101143.jpeg",
+        src: "",
         alt: "Psicóloga em uma sessão de terapia, ouvindo atentamente um paciente",
       },
       keyInfo: {
@@ -892,7 +892,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Saúde e Bem-Estar – Gestão e Cuidado Integrado",
       img: {
-        src: "https://images.pexels.com/photos/3786126/pexels-photo-3786126.jpeg",
+        src: "",
         alt: "Equipe de enfermagem sorrindo e colaborando em um ambiente hospitalar",
       },
       keyInfo: {
@@ -929,7 +929,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Segurança Pública – Estratégia e Gestão",
       img: {
-        src: "https://images.pexels.com/photos/8541249/pexels-photo-8541249.jpeg",
+        src: "",
         alt: "Agente de segurança pública analisando um mapa estratégico",
       },
       keyInfo: {
@@ -966,7 +966,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Serviço Social – Impacto e Cidadania na Prática",
       img: {
-        src: "https://images.pexels.com/photos/6994992/pexels-photo-6994992.jpeg",
+        src: "",
         alt: "Assistente social conversando com uma família em uma visita comunitária",
       },
       keyInfo: {
@@ -1003,7 +1003,7 @@ export default function StoragedAreaInfo(): AreaInformationsProps[] {
     {
       title: "Tecnologia da Informação – Inovação que Move o Futuro",
       img: {
-        src: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
+        src: "",
         alt: "Desenvolvedor de software programando com código na tela do computador",
       },
       keyInfo: {
