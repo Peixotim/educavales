@@ -69,10 +69,7 @@ export const Header = () => {
         (formData.get("interestArea") as string) || ""
       ).trim();
       const phone = normalizePhone((formData.get("whatsapp") as string) || "");
-      const enterpriseId = toSafeNumber(
-        process.env.NEXT_PUBLIC_ENTERPRISE_ID,
-        1
-      );
+      const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID);
 
       if (!name || !areaOfInterest || phone.length < 12) {
         setFormStatus("form");

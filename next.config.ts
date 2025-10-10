@@ -10,10 +10,8 @@ images: {
         pathname: '/**', 
       },
       {
-        protocol: 'https',
-        hostname: 'www.pexels.com',  // <-- ADICIONE ESTE NOVO BLOCO
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "www.facebook.com",
       },
     ],
   },

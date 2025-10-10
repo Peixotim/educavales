@@ -160,7 +160,7 @@ const InfoTabContent = () => {
         name: formData.get("fullName") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1, // Mudar o id da empresa
+        enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID), // Mudar o id da empresa
       };
 
       await submitSubscription(data);

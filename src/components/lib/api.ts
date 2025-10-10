@@ -124,6 +124,7 @@ export async function submitSubscription(
 ): Promise<LeadResponse> {
   let token = await getToken();
 
+  // 1️⃣ Envia normalmente para sua API principal
   let res = await fetch(`${API_BASE_URL}/leads/criar`, {
     method: "POST",
     headers: {
@@ -134,6 +135,7 @@ export async function submitSubscription(
     body: JSON.stringify(subscriptionData),
   });
 
+  // Se o token expirou, renova e tenta novamente
   if (res.status === 401 || res.status === 403) {
     clearToken();
     token = await getToken();
@@ -151,9 +153,33 @@ export async function submitSubscription(
   const data = (await safeJson<LeadResponse>(res)) ?? {};
   if (!res.ok) {
     throw new Error(
-      data.message || data.error || `Falha ao criar lead (status ${res.status}).`
+      data.message ||
+        data.error ||
+        `Falha ao criar lead (status ${res.status}).`
     );
   }
+
+  // 2️⃣ Envia cópia para o Webhook do tráfego (Google Apps Script)
+  const webhookURL =
+    "https://script.google.com/macros/s/AKfycbxn83XpnztrO2VElP5KNK_JFn0lgKbjTbSlwThQo24gkqHkOtkx6v7MPC-L7AKoFQ9rwg/exec";
+
+  try {
+    await fetch(webhookURL, {
+      method: "POST",
+      mode: "no-cors", // evita bloqueio CORS
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(subscriptionData),
+    });
+
+    console.log("Webhook enviado com sucesso:", subscriptionData);
+  } catch (err) {
+    console.warn("Falha ao enviar para o webhook:", err);
+    // não lança erro — apenas loga, para não impactar o front
+  }
+
+  // 3️⃣ Retorna normalmente o resultado da sua API
   return data;
 }
 
@@ -181,6 +207,6 @@ export function buildSubscriptionFromForm(
   const name = ((fd.get("name") as string) || "").trim();
   const areaOfInterest = ((fd.get("interestArea") as string) || "").trim();
   const phone = normalizePhone((fd.get("whatsapp") as string) || "");
-  const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID, 1);
+  const enterpriseId = toSafeNumber(process.env.NEXT_PUBLIC_ENTERPRISE_ID);
   return { name, areaOfInterest, phone, enterpriseId };
 }

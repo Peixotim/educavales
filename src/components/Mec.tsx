@@ -78,7 +78,7 @@ export function MecCertificationSection() {
         name: formData.get("name") as string,
         phone: (formData.get("whatsapp") as string).replace(/\D/g, ""),
         areaOfInterest: formData.get("interestArea") as string,
-        enterpriseId: 1, // Defina o ID correto da empresa aqui
+        enterpriseId: Number(process.env.NEXT_PUBLIC_ENTERPRISE_ID), // Defina o ID correto da empresa aqui
       };
 
       await submitSubscription(data);
